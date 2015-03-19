@@ -1,13 +1,4 @@
-<?php 
-$options = get_option('salient');
-global $post;
-
-$masonry_size_pm = get_post_meta($post->ID, '_post_item_masonry_sizing', true); 
-$masonry_item_sizing = (!empty($masonry_size_pm)) ? $masonry_size_pm : 'regular'; 
-$using_masonry = null;
-$masonry_type = (!empty($options['blog_masonry_type'])) ? $options['blog_masonry_type'] : 'classic'; ?>
-
-<article id="post-<?php the_ID(); ?>" <?php post_class($masonry_item_sizing.' quote'); ?>>
+<article class="post quote">
 	
 	<div class="post-content">
 		
@@ -15,10 +6,9 @@ $masonry_type = (!empty($options['blog_masonry_type'])) ? $options['blog_masonry
 			
 			<div class="post-meta">
 				
-				<?php  
+				<?php $options = get_option('salient'); 
 				global $layout;
-				$blog_type = $options['blog_type']; 
-				?>
+				$blog_type = $options['blog_type']; ?>
 	
 				<div class="date">
 					<?php 
@@ -27,7 +17,6 @@ $masonry_type = (!empty($options['blog_masonry_type'])) ? $options['blog_masonry
 					$blog_type == 'masonry-blog-fullwidth' && substr( $layout, 0, 3 ) != 'std' || 
 					$blog_type == 'masonry-blog-full-screen-width' && substr( $layout, 0, 3 ) != 'std' || 
 					$layout == 'masonry-blog-sidebar' || $layout == 'masonry-blog-fullwidth' || $layout == 'masonry-blog-full-screen-width') {
-						$using_masonry = true;
 						echo get_the_date();
 					}
 					else { ?>
@@ -41,11 +30,9 @@ $masonry_type = (!empty($options['blog_masonry_type'])) ? $options['blog_masonry
 					} ?>
 				</div><!--/date-->
 				
-				<?php if($using_masonry == true && $masonry_type == 'meta_overlaid') { } else { ?> 
-					<div class="nectar-love-wrap">
-						<?php if( function_exists('nectar_love') ) nectar_love(); ?>
-					</div><!--/nectar-love-wrap-->	
-				<?php } ?>
+				<div class="nectar-love-wrap">
+					<?php if( function_exists('nectar_love') ) nectar_love(); ?>
+				</div><!--/nectar-love-wrap-->	
 							
 			</div><!--/post-meta-->
 		
@@ -60,17 +47,16 @@ $masonry_type = (!empty($options['blog_masonry_type'])) ? $options['blog_masonry
 			<div class="quote-inner">
 				
 				<?php if( !is_single() ) { ?> <a class="whole-link" href="<?php the_permalink(); ?>"></a><?php } ?>
-					<span class="quote-wrap">
-						<?php if( !is_single() ) { ?> <a href="<?php the_permalink(); ?>"><?php } ?> 
-							<h2 class="title">
-								<?php echo $quote; ?>
-							</h2> 
-						<?php if( !is_single() ) { ?> </a> <?php } ?>
-						
-				    	<span class="author"> 
-				    		<?php the_title(); ?>
-				    	</span> 
-				    </span>
+				
+					<?php if( !is_single() ) { ?> <a href="<?php the_permalink(); ?>"><?php } ?> 
+						<h2 class="title">
+							<?php echo $quote; ?>
+						</h2> 
+					<?php if( !is_single() ) { ?> </a> <?php } ?>
+				
+		    	<span class="author"> 
+		    		<?php the_title(); ?>
+		    	</span> 
 		    	<span title="Quote" class="icon"></span>
 
 		    	<?php if( !is_single() ) { ?> </a> <?php } ?>

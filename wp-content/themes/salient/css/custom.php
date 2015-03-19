@@ -247,7 +247,7 @@ function nectar_custom_css() {
 					 }
 
 					 #header-outer.transparent header#top nav > ul > li > a, 
-					 #header-outer.transparent header#top nav ul #search-btn a span.icon-salient-search, 
+					 #header-outer.transparent header#top nav ul #search-btn a span, 
 					 #header-outer.transparent nav > ul > li > a > .sf-sub-indicator [class^="icon-"], 
 					 #header-outer.transparent nav > ul > li > a > .sf-sub-indicator [class*=" icon-"],
 					 #header-outer.transparent .cart-menu .cart-icon-wrap .icon-salient-cart,
@@ -261,21 +261,15 @@ function nectar_custom_css() {
 					#header-outer.transparent header#top nav .sf-menu > li.current-menu-item > a, #header-outer.transparent header#top nav .sf-menu > li.current-menu-ancestor > a, #header-outer.transparent header#top nav .sf-menu > li.current_page_item > a,
 					#header-outer.transparent header#top nav > ul > li > a:hover > .sf-sub-indicator > i, #header-outer.transparent header#top nav > ul > li.sfHover > a > span > i, #header-outer.transparent header#top nav ul #search-btn a:hover span, #header-outer.transparent header#top nav ul .slide-out-widget-area-toggle a:hover span,
 					#header-outer.transparent header#top nav .sf-menu > li.current-menu-item > a i, #header-outer.transparent header#top nav .sf-menu > li.current-menu-ancestor > a i,
-					#header-outer.transparent .cart-outer:hover .icon-salient-cart, .ascend #boxed #header-outer.transparent .cart-outer:hover .cart-menu .cart-icon-wrap .icon-salient-cart,
-					#header-outer.transparent.directional-nav-effect header#top nav > ul > li > a span.light,
-					#header-outer.transparent.directional-nav-effect header#top nav > ul.buttons > li a span.light,
-					#header-outer.transparent.directional-nav-effect .cart-menu .cart-icon-wrap span.light .icon-salient-cart, 
-					#header-outer.transparent.directional-nav-effect header#top nav ul #search-btn a span.light span.icon-salient-search
-					{
-						opacity: 1!important;
+					#header-outer.transparent .cart-outer:hover .icon-salient-cart, .ascend #boxed #header-outer.transparent .cart-outer:hover .cart-menu .cart-icon-wrap .icon-salient-cart {
+						opacity: 1!Important;
 						color: '.$starting_color.'!important;
 					}
 
 
-					#header-outer.transparent:not(.directional-nav-effect) header#top nav ul .slide-out-widget-area-toggle a i.lines, 
-					#header-outer.transparent:not(.directional-nav-effect) header#top nav ul .slide-out-widget-area-toggle a i.lines:before,
-					#header-outer.transparent:not(.directional-nav-effect) header#top nav ul .slide-out-widget-area-toggle a i.lines:after,
-					#header-outer.transparent.directional-nav-effect header#top nav ul .slide-out-widget-area-toggle a span.light .lines-button i, #header-outer.transparent.directional-nav-effect header#top nav ul .slide-out-widget-area-toggle a span.light .lines-button i:after, #header-outer.transparent.directional-nav-effect header#top nav ul .slide-out-widget-area-toggle a span.light .lines-button i:before  {
+					#header-outer.transparent header#top nav ul .slide-out-widget-area-toggle a i.lines, 
+					#header-outer.transparent header#top nav ul .slide-out-widget-area-toggle a i.lines:before,
+					#header-outer.transparent header#top nav ul .slide-out-widget-area-toggle a i.lines:after {
 						background-color: '.$starting_color.'!important;
 					}
 					#header-outer.transparent header#top nav ul .slide-out-widget-area-toggle a i.lines {
@@ -429,7 +423,7 @@ function nectar_custom_css() {
 		 @media only screen and (min-width: 1000px) {
 			 .woocommerce #reviews #comments, .woocommerce #reviews #review_form_wrapper {  float: left; width: 47%; }
 			 .woocommerce #reviews #comments { margin-right: 3%; width: 50%; } 
-			 .woocommerce.ascend #respond { margin-top: 0px!important; }
+			 .ascend #respond { margin-top: 0px!important; }
 			 .woocommerce .woocommerce-tabs > div { margin-top: 15px!important; }
 			 .woocommerce #reviews #reply-title { margin-top: 5px!important; }
 		 }';

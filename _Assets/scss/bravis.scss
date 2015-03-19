@@ -1,0 +1,18 @@
+#boxed .container-wrap { 
+	background-image:url(http://bravisgroup.com/wp-content/uploads/2015/03/debut_light.png);
+}
+
+#header-outer{
+	background:none;
+}
+
+header#top .span_9{
+	border-top:1px solid #ccc;
+	border-bottom:4px double #ccc;
+}
+
+header#top nav > ul > li > a{
+	padding:.5em 0 .25em 0 !important;
+	margin-right:2em;
+	color:#333;
+}

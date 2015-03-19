@@ -9,8 +9,7 @@ jQuery(document).ready(function($){
 		
 		$searchContainer.isotope({
 		   itemSelector: '.result',
-		   layoutMode: 'packery',
-		   packery: { columnWidth: $('#search-results').width() / 3 }
+		   masonry: { columnWidth: $('#search-results').width() / 3 }
 		});
 		
 		$searchContainer.css('visibility','visible');
@@ -19,8 +18,7 @@ jQuery(document).ready(function($){
 	
 	$(window).smartresize(function(){
 	   $searchContainer.isotope({
-	   	  layoutMode: 'packery',
-	      packery: { columnWidth: $('#search-results').width() / 3}
+	      masonry: { columnWidth: $('#search-results').width() / 3}
 	   });
 	});
 

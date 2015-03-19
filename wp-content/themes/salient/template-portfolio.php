@@ -118,7 +118,7 @@ $bg = get_post_meta($post->ID, '_nectar_header_bg', true);
 			$filters_width = (!empty($options['header-fullwidth']) && $options['header-fullwidth'] == '1' && $cols == 'elastic') ? 'full-width-content ': 'full-width-section ';
 
 			?>
-			<div class="<?php echo $filters_id .' '; echo $filters_width; if($span_num != 'elastic-portfolio-item') echo 'non-fw'; ?>">
+			<div id="<?php echo $filters_id;?>" class="<?php echo $filters_width; if($span_num != 'elastic-portfolio-item') echo 'non-fw'; ?>">
 				<div class="container">
 					<span id="current-category"><?php echo __('All', NECTAR_THEME_NAME); ?></span>
 					<ul>
@@ -205,10 +205,6 @@ $bg = get_post_meta($post->ID, '_nectar_header_bg', true);
 					  $the_project_link = (!empty($custom_project_link)) ? $custom_project_link : get_permalink();
 					  
 					  $project_excerpt = get_post_meta($post->ID, '_nectar_project_excerpt', true);
-
-					  $project_image_caption = get_post(get_post_thumbnail_id())->post_content;
-					  $project_image_caption = strip_tags($project_image_caption);
-					  
 					  $project_accent_color = get_post_meta($post->ID, '_nectar_project_accent_color', true);	
 					?>
 					
@@ -288,9 +284,7 @@ $bg = get_post_meta($post->ID, '_nectar_header_bg', true);
 										
 										//image
 									    else {
-									        echo '<a href="'. $featured_image[0].'"'; 
-									       if(!empty($project_image_caption)) echo 'title="'.$project_image_caption.'"';
-									       echo 'class="pretty_photo">'.__("View Larger", NECTAR_THEME_NAME).'</a> ';
+									       echo '<a href="'. $featured_image[0].'" class="pretty_photo" >'.__("View Larger", NECTAR_THEME_NAME).'</a> ';
 									    }
 										
 									    echo '<a href="' . $the_project_link . '">'.__("More Details", NECTAR_THEME_NAME).'</a>'; ?>

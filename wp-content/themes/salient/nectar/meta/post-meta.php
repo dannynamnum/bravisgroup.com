@@ -181,36 +181,6 @@
 		
 		
 
-		#-----------------------------------------------------------------#
-		# Post Configuration
-		#-----------------------------------------------------------------# 
-		if(!empty($options['blog_masonry_type']) && $options['blog_masonry_type'] == 'meta_overlaid') {
-			$meta_box = array(
-				'id' => 'nectar-metabox-post-config',
-				'title' =>  __('Post Configuration', NECTAR_THEME_NAME),
-				'description' => __('Configure the various options for how your post will display', NECTAR_THEME_NAME),
-				'post_type' => 'post',
-				'context' => 'normal',
-				'priority' => 'high',
-				'fields' => array(
-					array( 
-						'name' => __('Masonry Item Sizing', NECTAR_THEME_NAME),
-						'desc' => __('This will only be used if you choose to display your portfolio in the masonry format', NECTAR_THEME_NAME),
-						'id' => '_post_item_masonry_sizing',
-						'type' => 'select',
-						'std' => 'tall_regular',
-						'options' => array(
-							"regular" => "Regular",
-					  		"wide_tall" => "Regular x2",
-					  		"large_featured" => "Large Featured",
-						)
-					)
-				)
-			);
-			add_meta_box( $meta_box['id'], $meta_box['title'], $callback, $meta_box['post_type'], $meta_box['context'], $meta_box['priority'], $meta_box );
-		}
-		
-
 		
 		#-----------------------------------------------------------------#
 		# Header Settings

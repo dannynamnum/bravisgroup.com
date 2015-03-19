@@ -256,6 +256,14 @@ function setup_framework_options(){
                 'std' => '1' 
             ),
             array(
+                'id' => 'disable-vc',
+                'type' => 'checkbox',
+                'title' => __('Disable Salient Visual Composer', NECTAR_THEME_NAME), 
+                'sub_desc' => __('This gives you the option to remove the built in Salient version of Visual Composer in case you wanted to use the raw plugin instead.', NECTAR_THEME_NAME),
+                'desc' => '',
+                'std' => '0' 
+            ),  
+            array(
                 'id' => 'default-lightbox',
                 'type' => 'checkbox',
                 'title' => __('Auto Lightbox Image Links', NECTAR_THEME_NAME), 
@@ -1584,7 +1592,7 @@ function setup_framework_options(){
 
             array(
                 'id' => 'header-slide-out-widget-area',
-                'type' => 'checkbox_hide_below',
+                'type' => 'checkbox',
                 'title' => __('Slide Out Widget Area', NECTAR_THEME_NAME), 
                 'sub_desc' => __('This will add a header link that reveals a side widget area', NECTAR_THEME_NAME),
                 'desc' => '',
@@ -1592,19 +1600,6 @@ function setup_framework_options(){
                 'std' => '0' 
             ),
             
-            array(
-                'id' => 'header-slide-out-widget-area-overlay-opacity', 
-                'type' => 'select', 
-                'title' => __('Slide Out Widget Area Overlay Strength', NECTAR_THEME_NAME),
-                'sub_desc' => __('Please select your Slide Out Widget Area overlay strength here.', NECTAR_THEME_NAME),
-                'desc' => '',
-                'options' => array(
-                    'dark' => __('Dark', NECTAR_THEME_NAME), 
-                    'medium' => __('Medium', NECTAR_THEME_NAME),
-                    'light' => __('Light', NECTAR_THEME_NAME)
-                ),
-                'std' => 'dark'
-            ),
 
             array(
                 'id' => 'header-disable-search',
@@ -1927,13 +1922,6 @@ function setup_framework_options(){
                 'title' => __('Use VK Icon', NECTAR_THEME_NAME), 
                 'sub_desc' => '',
                 'desc' => ''
-            ),
-            array(
-                'id' => 'use-vine-icon-header',
-                'type' => 'checkbox',
-                'title' => __('Use Vine Icon', NECTAR_THEME_NAME), 
-                'sub_desc' => '',
-                'desc' => ''
             )
              
         )
@@ -2182,13 +2170,6 @@ function setup_framework_options(){
                 'id' => 'use-vk-icon',
                 'type' => 'checkbox',
                 'title' => __('Use VK Icon', NECTAR_THEME_NAME), 
-                'sub_desc' => '',
-                'desc' => ''
-            ),
-            array(
-                'id' => 'use-vine-icon',
-                'type' => 'checkbox',
-                'title' => __('Use Vine Icon', NECTAR_THEME_NAME), 
                 'sub_desc' => '',
                 'desc' => ''
             )
@@ -2529,16 +2510,8 @@ function setup_framework_options(){
                 'title' => __('Main Portfolio Page URL', NECTAR_THEME_NAME),
                 'sub_desc' => __('This will be used to link back to your main portfolio from the more details page and for the recent projects link. i.e. The portfolio page that you are displaying all project categories on.', NECTAR_THEME_NAME),
                 'desc' => ''
-			),
-             array(
-                'id' => 'portfolio_same_category_single_nav',
-                'type' => 'checkbox',
-                'title' => __('Single Project Nav Arrows Limited To Same Category', NECTAR_THEME_NAME), 
-                'sub_desc' => __('This will cause your single project page next/prev arrows to lead only to projects that exist in the same category as the current.', NECTAR_THEME_NAME),
-                'desc' => '',
-                'std' => '0' 
-            )
-                                      
+			)
+                                       
         )
     );
 	
@@ -2565,18 +2538,6 @@ function setup_framework_options(){
 				),
 			    'std' => 'std-blog-sidebar'
 		    ), 
-            array(
-                'id' => 'blog_masonry_type',
-                'type' => 'radio',
-                'title' => __('Masonry Style', NECTAR_THEME_NAME), 
-                'sub_desc' => __('Please select the style you would like your posts to use when the masonry layout is displayed', NECTAR_THEME_NAME),
-                'desc' => __('', NECTAR_THEME_NAME),
-                'options' => array(
-                                'classic' => __('Classic', NECTAR_THEME_NAME),
-                                'meta_overlaid' => __('Meta Overlaid', NECTAR_THEME_NAME),
-                            ),
-                'std' => 'classic'
-            ),
 			array( 
                 'id' => 'author_bio',
                 'type' => 'checkbox',
@@ -3424,13 +3385,6 @@ function setup_framework_options(){
                 'title' => __('VK URL', NECTAR_THEME_NAME),
                 'sub_desc' => __('Please enter in your VK URL.', NECTAR_THEME_NAME),
                 'desc' => ''
-            ),
-            array(
-                'id' => 'vine-url', 
-                'type' => 'text', 
-                'title' => __('Vine URL', NECTAR_THEME_NAME),
-                'sub_desc' => __('Please enter in your Vine URL.', NECTAR_THEME_NAME),
-                'desc' => ''
             )
         )
     );
@@ -3601,7 +3555,7 @@ function setup_framework_options(){
     $item_info .= '<p class="redux-opts-item-data description item-version">' . __('<strong>Version:</strong> ', NECTAR_THEME_NAME) . $version . '</p>';
     $item_info .= '<p class="redux-opts-item-data description item-tags"><div class="redux-opts-heading"><h3>' . __('Documentation: ', NECTAR_THEME_NAME) . '</h3></div>';
 	$item_info .= '<p>'.__('**Please note that the following embedded documentation is displayed in a lower quality than the one included with your purchase.', NECTAR_THEME_NAME).'</p>';
-	$item_info .= '<iframe src="https://docs.google.com/gview?url=themenectar.com/docs/salient.pdf&embedded=true" style="width:100%; height:600px;" frameborder="0"></iframe>';
+	$item_info .= '<iframe src="http://docs.google.com/gview?url=themenectar.com/docs/salient.pdf&embedded=true" style="width:100%; height:600px;" frameborder="0"></iframe>';
     $item_info .= '</div>';
 
     $tabs['item_info'] = array(

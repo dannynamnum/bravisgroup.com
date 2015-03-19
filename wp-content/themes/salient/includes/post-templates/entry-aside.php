@@ -1,13 +1,4 @@
-<?php 
-$options = get_option('salient');
-global $post;
-
-$masonry_size_pm = get_post_meta($post->ID, '_post_item_masonry_sizing', true); 
-$masonry_item_sizing = (!empty($masonry_size_pm)) ? $masonry_size_pm : 'regular'; 
-$masonry_type = (!empty($options['blog_masonry_type'])) ? $options['blog_masonry_type'] : 'classic';
-$using_masonry = null; ?>
-
-<article id="post-<?php the_ID(); ?>" <?php post_class($masonry_item_sizing); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<div class="post-content">
 		
@@ -23,8 +14,9 @@ $using_masonry = null; ?>
 			
 			<div class="post-meta <?php echo $extra_class; ?>">
 				
-				<?php 
+				<?php $options = get_option('salient'); 
 				$blog_type = $options['blog_type']; 
+				
 				$use_excerpt = (!empty($options['blog_auto_excerpt']) && $options['blog_auto_excerpt'] == '1') ? 'true' : 'false'; 
 				?>
 				
@@ -35,7 +27,6 @@ $using_masonry = null; ?>
 					$blog_type == 'masonry-blog-fullwidth' && substr( $layout, 0, 3 ) != 'std' || 
 					$blog_type == 'masonry-blog-full-screen-width' && substr( $layout, 0, 3 ) != 'std' || 
 					$layout == 'masonry-blog-sidebar' || $layout == 'masonry-blog-fullwidth' || $layout == 'masonry-blog-full-screen-width') {
-						$using_masonry = true;
 						echo get_the_date();
 					}
 					else { ?>
@@ -50,11 +41,9 @@ $using_masonry = null; ?>
 					
 				</div><!--/date-->
 				
-				<?php if($using_masonry == true && $masonry_type == 'meta_overlaid') { } else { ?> 
-					<div class="nectar-love-wrap">
-						<?php if( function_exists('nectar_love') ) nectar_love(); ?>
-					</div><!--/nectar-love-wrap-->	
-				<?php } ?>
+				<div class="nectar-love-wrap">
+					<?php if( function_exists('nectar_love') ) nectar_love(); ?>
+				</div><!--/nectar-love-wrap-->	
 							
 			</div><!--/post-meta-->
 			
@@ -63,10 +52,8 @@ $using_masonry = null; ?>
 		<div class="content-inner">
 			
 			<?php if ( has_post_thumbnail() ) {
-				 
-				 $img_size = ($blog_type == 'masonry-blog-sidebar' && substr( $layout, 0, 3 ) != 'std' || $blog_type == 'masonry-blog-fullwidth' && substr( $layout, 0, 3 ) != 'std' || $blog_type == 'masonry-blog-full-screen-width' && substr( $layout, 0, 3 ) != 'std' || $layout == 'masonry-blog-sidebar' || $layout == 'masonry-blog-fullwidth' || $layout == 'masonry-blog-full-screen-width') ? 'large' : 'full';
-				 if($using_masonry == true && $masonry_type == 'meta_overlaid') $img_size  = (!empty($masonry_item_sizing)) ? $masonry_item_sizing : 'portfolio-thumb';
-				 if( !is_single() ) {  echo'<a href="' . get_permalink() . '"><span class="post-featured-img">'.get_the_post_thumbnail($post->ID, $img_size, array('title' => '')) .'</span></a>'; }
+				
+				 if( !is_single() ) {  echo'<a href="' . get_permalink() . '"><span class="post-featured-img">'.get_the_post_thumbnail($post->ID, 'full', array('title' => '')) .'</span></a>'; }
 
 				 global $options;
 				 $hide_featrued_image = (!empty($options['blog_hide_featured_image'])) ? $options['blog_hide_featured_image'] : '0'; 
@@ -82,7 +69,7 @@ $using_masonry = null; ?>
 				
 				<?php if( !is_single() ) { ?>
 				<div class="post-header">
-					<span class="meta-author"><span><?php echo __('By', NECTAR_THEME_NAME); ?></span> <?php the_author_posts_link(); ?></span> <span class="meta-category">| <?php the_category(', '); ?></span> <span class="meta-comment-count">| <a href="<?php comments_link(); ?>">
+					<span class="meta-author"><?php echo __('By', NECTAR_THEME_NAME); ?> <?php the_author_posts_link(); ?></span> <span class="meta-category">| <?php the_category(', '); ?></span> <span class="meta-comment-count">| <a href="<?php comments_link(); ?>">
 					<?php comments_number( __('No Comments', NECTAR_THEME_NAME), __('One Comment ', NECTAR_THEME_NAME), __('% Comments', NECTAR_THEME_NAME) ); ?></a></span>
 				</div><!--/post-header-->
 				

@@ -3,8 +3,6 @@ $output = $el_class = $width = '';
 extract(shortcode_atts(array(
     'el_class' => '',
     'width' => '1/1',
-    'offset' => '',
-    'css' => '',
     "boxed" => 'false', 
     "centered_text" => 'false', 
     'enable_animation' => '',
@@ -23,7 +21,6 @@ extract(shortcode_atts(array(
 //var init
 $el_class = $this->getExtraClass($el_class);
 $width = wpb_translateColumnWidthToSpan($width);
-$width = vc_column_offset_class_merge($offset, $width);
 $box_border = null;
 $parsed_animation = null;	
 $style = 'style="';
@@ -63,7 +60,8 @@ if(!empty($animation) && $animation != 'none' && $enable_animation == 'true') {
 }
 
 $column_link_html = (!empty($column_link)) ? '<a class="column-link" href="'.$column_link.'"></a>' : null;
-$css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $width . $el_class . vc_shortcode_custom_css_class( $css, ' ' ), $this->settings['base'], $atts );
+
+$css_class = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $width.$el_class, $this->settings['base']);
 $output .= "\n\t".'<div '.$style.' class="'.$css_class.'" '.$using_bg.' data-padding-pos="'. $column_padding_position .'" data-hover-bg="'.$background_color_hover.'" data-animation="'.strtolower($parsed_animation).'" data-delay="'.$delay.'">' . $column_link_html;
 $output .= "\n\t\t".'<div class="wpb_wrapper">';
 $output .= "\n\t\t\t".wpb_js_remove_wpautop($content);

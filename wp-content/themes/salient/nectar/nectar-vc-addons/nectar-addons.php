@@ -3,41 +3,7 @@
 global $options;
 $vc_is_wp_version_3_6_more = version_compare(preg_replace('/^([\d\.]+)(\-.*$)/', '$1', get_bloginfo('version')), '3.6') >= 0;
 
-
-function nectar_set_vc_as_theme() {
-
-	vc_set_as_theme($disable_updater = true);
-
-	if(defined( 'SALIENT_VC_ACTIVE')) {
-	    $child_dir = get_template_directory() . '/nectar/nectar-vc-addons/vc_templates';
-	    $parent_dir = get_template_directory() . '/nectar/nectar-vc-addons/vc_templates';
-
-	    vc_set_shortcodes_templates_dir($parent_dir);
-	    vc_set_shortcodes_templates_dir($child_dir);
-	} else {
-
-	    $child_dir = get_template_directory() . '/nectar/nectar-vc-addons/vc_templates';
-	    $parent_dir = get_template_directory() . '/nectar/nectar-vc-addons/vc_templates';
-	    vc_set_shortcodes_templates_dir($parent_dir);
-	    vc_set_shortcodes_templates_dir($child_dir);
-	}
-
-
-	vc_disable_frontend();
-}
-
-add_action('vc_before_init', 'nectar_set_vc_as_theme');
-
-
-
-add_filter( 'vc_load_default_templates', 'my_custom_template_modify_array' ); // Hook in
-function my_custom_template_modify_array( $data ) {
-    return array(); 
-}
-
-
 vc_remove_element("vc_button");
-vc_remove_element("vc_button2");
 vc_remove_element("vc_posts_slider");
 vc_remove_element("vc_gmaps");
 vc_remove_element("vc_teaser_grid");
@@ -55,18 +21,11 @@ vc_remove_element("vc_tour");
 vc_remove_element("vc_separator");
 vc_remove_element("vc_single_image");
 vc_remove_element("vc_cta_button");
-vc_remove_element("vc_cta_button2");
-
-
 vc_remove_element("vc_accordion");
 vc_remove_element("vc_accordion_tab");
 vc_remove_element("vc_toggle");
 vc_remove_element("vc_tabs");
 vc_remove_element("vc_tab");
-
-
-vc_remove_element("vc_empty_space");
-vc_remove_element("vc_custom_heading");
 vc_remove_element("vc_images_carousel");
 vc_remove_element("vc_wp_archives");
 vc_remove_element("vc_wp_calendar");
@@ -107,7 +66,7 @@ vc_add_param("vc_row", array(
 vc_add_param("vc_row", array(
 	"type" => "checkbox",
 	"class" => "",
-	"heading" => "Vertically Center Columns",
+	"heading" => "Vetically Center Columns",
 	"value" => array("Make all columns in this row vertically centered?" => "true" ),
 	"param_name" => "vertically_center_columns",
 	"description" => "",
@@ -469,8 +428,6 @@ vc_add_param("vc_row_inner", array(
 ));
 
 
-require_once vc_path_dir('SHORTCODES_DIR', 'vc-row.php');
-
 class WPBakeryShortCode_Full_Width_Section extends WPBakeryShortCode_VC_Row {
 		
 			
@@ -486,7 +443,7 @@ class WPBakeryShortCode_Full_Width_Section extends WPBakeryShortCode_VC_Row {
             $output .= '<div'.$this->customAdminBockParams().' data-element_type="vc_row" class="'.$this->settings['base'].' wpb_vc_row wpb_sortable">';
             $output .= str_replace("%column_size%", 1, $column_controls);
             $output .= '<div class="wpb_element_wrapper">';
-            $output .= '<div class="vc_row-fluid vc_row wpb_row_container vc_container_for_children">';
+            $output .= '<div class="vc_row-fluid wpb_row_container vc_container_for_children">';
             if($content=='' && !empty($this->settings["default_content_in_template"])) {
                 $output .= do_shortcode( shortcode_unautop($this->settings["default_content_in_template"]) );
             } else {
@@ -1153,45 +1110,21 @@ vc_map( array(
       "heading" => __("Display Arrow Navigation?", "js_composer"),
       "param_name" => "arrow_navigation",
       "description" => __("Would you like this slider to display arrows on the right and left sides?", "js_composer"),
-      "value" => Array(__("Yes, please", "js_composer") => 'true'),
-      "dependency" => Array('element' => "overall_style", 'value' => 'classic')
-    ),
-     array(
-      "type" => "dropdown",
-      "heading" => __("Slider Next/Prev Button Styling", "js_composer"),
-      "param_name" => "slider_button_styling",
-      "dependency" => Array('element' => "arrow_navigation", 'not_empty' => true),
-      "value" => array(
-			'Standard With Slide Count On Hover' => 'btn_with_count',
-			'Next/Prev Slide Preview On Hover' => 'btn_with_preview'
-      ),
-      "description" => 'Please select your slider button styling here',
-    ),
-     array(
-      "type" => "dropdown",
-      "heading" => __("Overall Style", "js_composer"),
-      "param_name" => "overall_style",
-      "value" => array(
-			'Classic' => 'classic',
-			'Directional Based Content Movement' => 'directional'
-      ),
-      "description" => 'Please select your overall style here - note that some styles will remove the possibility to control certain options'
+      "value" => Array(__("Yes, please", "js_composer") => 'true')
     ),
     array(
       "type" => 'checkbox',
       "heading" => __("Display Bullet Navigation?", "js_composer"),
       "param_name" => "bullet_navigation",
       "description" => __("Would you like this slider to display bullets on the bottom?", "js_composer"),
-      "value" => Array(__("Yes, please", "js_composer") => 'true'),
-      "dependency" => Array('element' => "overall_style", 'value' => 'classic')
+      "value" => Array(__("Yes, please", "js_composer") => 'true')
     ),
     array(
       "type" => 'checkbox',
       "heading" => __("Enable Swipe on Desktop?", "js_composer"),
       "param_name" => "desktop_swipe",
       "description" => __("Would you like this slider to have swipe interaction on desktop?", "js_composer"),
-      "value" => Array(__("Yes, please", "js_composer") => 'true'),
-      "dependency" => Array('element' => "overall_style", 'value' => 'classic')
+      "value" => Array(__("Yes, please", "js_composer") => 'true')
     ),
     array(
       "type" => 'checkbox',
@@ -1205,8 +1138,7 @@ vc_map( array(
       "heading" => __("Loop Slider?", "js_composer"),
       "param_name" => "loop",
       "description" => __("Would you like your slider to loop infinitely?", "js_composer"),
-      "value" => Array(__("Yes, please", "js_composer") => 'true'),
-      "dependency" => Array('element' => "overall_style", 'value' => 'classic')
+      "value" => Array(__("Yes, please", "js_composer") => 'true')
     ),
     array(
       "type" => "dropdown",
@@ -1216,8 +1148,7 @@ vc_map( array(
 			'Slide' => 'slide',
 			'Fade' => 'fade'
       ),
-      "description" => 'Please select your slider transition here',
-      "dependency" => Array('element' => "overall_style", 'value' => 'classic')
+      "description" => 'Please select your slider transition here'
     ),
     array(
       "type" => "textfield",
@@ -1227,6 +1158,7 @@ vc_map( array(
     ),
     array(
 		"type" => "dropdown",
+		"holder" => "div",
 		"class" => "",
 		"heading" => "Button Sizing",
 		"param_name" => "button_sizing",
@@ -1378,7 +1310,7 @@ vc_map( array(
       "heading" => __("Image link", "js_composer"),
       "param_name" => "img_link",
       "description" => __("Enter url if you want this image to have link.", "js_composer"),
-      "dependency" => Array('element' => "img_link_large", 'is_empty' => true)
+      "dependency" => Array('element' => "img_link_large", 'is_empty' => true, 'callback' => 'wpb_single_image_img_link_dependency_callback')
     ),
     array(
       "type" => "dropdown",
@@ -1451,7 +1383,7 @@ vc_map( array(
 	),
 	array(
 	  "type" => "dropdown",
-	  "heading" => __("Starting Category", "js_composer"),
+	  "heading" => __("Staring Category", "js_composer"),
 	  "param_name" => "starting_category",
 	  "admin_label" => false,
 	  "value" => $types_options_2,
@@ -1909,9 +1841,6 @@ vc_map( array(
 
 
 // Google Map
-class WPBakeryShortCode_Nectar_Gmap extends WPBakeryShortCode {
-}
-
 vc_map( array(
   "name" => __("Google Map", "js_composer"),
   "base" => "nectar_gmap",
@@ -2117,10 +2046,6 @@ vc_map( array(
 
 
 
-
-require_once vc_path_dir('SHORTCODES_DIR', 'vc-accordion.php');
-require_once vc_path_dir('SHORTCODES_DIR', 'vc-accordion-tab.php');
-
 /* Accordion block
 ---------------------------------------------------------- */
 vc_map( array(
@@ -2145,7 +2070,7 @@ vc_map( array(
   %content%
   </div>
   <div class="tab_controls">
- <a class="add_tab" title="' . __( 'Add section', 'js_composer' ) . '"><span class="vc_icon"></span> <span class="tab-label">' . __( 'Add section', 'js_composer' ) . '</span></a>
+  <button class="add_tab" title="'.__("Add toggle", "js_composer").'">'.__("Add toggle", "js_composer").'</button>
   </div>
   ',
   'default_content' => '
@@ -2155,7 +2080,7 @@ vc_map( array(
   'js_view' => 'VcAccordionView'
 ));
 vc_map( array(
-  "name" => __("Section", "js_composer"),
+  "name" => __("Accordion Section", "js_composer"),
   "base" => "toggle",
   "allowed_container_element" => 'vc_row',
   "is_container" => true,
@@ -2189,7 +2114,6 @@ vc_map( array(
 
 
 
-require_once vc_path_dir('SHORTCODES_DIR', 'vc-tabs.php');
 
 /* Tabs
 ---------------------------------------------------------- */
@@ -2250,7 +2174,7 @@ vc_map( array(
 
 
 
-
+/* testimonial slider */
 class WPBakeryShortCode_Testimonial_Slider extends WPBakeryShortCode_Tabbed_Section { }
 
 $tab_id_1 = time().'-1-'.rand(0, 100);

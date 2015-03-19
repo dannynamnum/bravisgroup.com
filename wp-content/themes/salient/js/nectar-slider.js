@@ -1881,16 +1881,9 @@ var Swiper = function (selector, params) {
                 if (params.queueEndCallbacks) {
                     if (_this._queueEndCallbacks) return;
                     _this._queueEndCallbacks = true;
-                    _this.wrapperTransitionEnd(function(swiper){ 
-                        setTimeout(function(){ if (params.loop) _this.fixLoop(); },50);
-                        _this.fireCallback(params.onSlideChangeEnd, swiper, direction)
-                    })
-                     
+                    _this.wrapperTransitionEnd(function(swiper){_this.fireCallback(params.onSlideChangeEnd, swiper, direction)})
                 }
-                else _this.wrapperTransitionEnd(function(swiper){
-                    setTimeout(function(){ if (params.loop) _this.fixLoop(); },50);
-                    _this.fireCallback(params.onSlideChangeEnd, swiper, direction)
-                })
+                else _this.wrapperTransitionEnd(function(swiper){_this.fireCallback(params.onSlideChangeEnd, swiper, direction)})
             }
             else {
                 if (!params.DOMAnimation) {
@@ -2814,7 +2807,7 @@ jQuery(document).ready(function($){
     		var $loop = $(this).find('.swiper-container').attr('data-loop');
     		
     		//swipe  
-    		if($swipe == 'true' && $('#'+$(this).attr('id') +' .swiper-wrapper > div').length > 1 && $(this).attr('data-overall_style') != 'directional' ){
+    		if($swipe == 'true' && $('#'+$(this).attr('id') +' .swiper-wrapper > div').length > 1 ){
     			var $grab = 1;
     			var $desktopSwipe = 1;
     		} else {
@@ -2823,22 +2816,22 @@ jQuery(document).ready(function($){
     		}
 
             ////set swipe as true for mobile
-            if($('body').hasClass('mobile') && $(this).attr('data-overall_style') != 'directional') $desktopSwipe = 1;
+            if($('body').hasClass('mobile')) $desktopSwipe = 1;
 
     		//bullets
-    		if($bullets == 'true' && $(this).find('.swiper-wrapper > div').length > 1 && $(this).attr('data-overall_style') != 'directional' ){
+    		if($bullets == 'true' && $(this).find('.swiper-wrapper > div').length > 1){
     			$bullets = '#'+$(this).attr('id')+' .slider-pagination';
     		} else {
     			$bullets = null;
     		}
 
             //loop
-            $useLoop = ($loop == 'true' && $(this).find('.swiper-wrapper > div').length > 1 && !$('html').hasClass('no-video') || $(this).attr('data-overall_style') == 'directional' && $(this).find('.swiper-wrapper > div').length > 1 && !$('html').hasClass('no-video')) ? true : false;
+            $useLoop = ($loop == 'true' && $(this).find('.swiper-wrapper > div').length > 1 && !$('html').hasClass('no-video')) ? true : false;
             if($useLoop == false) $(this).find('.swiper-container').attr('data-loop','false');
 
             //obj config
 
-            if($(this).attr('data-transition') == 'fade' && $(this).attr('data-overall_style') != 'directional' && $(this).attr('data-button-styling') != 'btn_with_preview'){
+            if($(this).attr('data-transition') == 'fade'){
                     
                    var progressVar = true;
                    var touchRatio = 1.3;
@@ -2852,7 +2845,7 @@ jQuery(document).ready(function($){
                         simulateTouch: $desktopSwipe,
                         onSlideChangeEnd: captionTransition,
                         onTouchEnd: captionTransition,
-                        onSlideChangeStart: onChangeStart,
+                        onSlideChangeStart: sliderArrowCount,
                         onTouchMove: clearAutoplay,
                         onFirstInit: nectarInit,
                         progress: progressVar,
@@ -2887,12 +2880,12 @@ jQuery(document).ready(function($){
                     loop: $useLoop,
                     grabCursor: $grab,
                     touchRatio: touchRatio,
-                    speed: 550,
+                    speed: 525,
                     useCSS3Transforms: false,
                     pagination : $bullets,
                     simulateTouch: $desktopSwipe,
                     onSlideChangeEnd: captionTransition,
-                    onSlideChangeStart: onChangeStart,
+                    onSlideChangeStart: sliderArrowCount,
                     onTouchMove: clearAutoplay,
                     onFirstInit: nectarInit
                         
@@ -2937,14 +2930,12 @@ jQuery(document).ready(function($){
 
      
     		//Navigation arrows
-
-            ////default arrows
-    		if($arrows == 'true' && $('#'+$(this).attr('id') +' .swiper-wrapper > div').length > 1 && $('#'+$(this).attr('id') + '.nectar-slider-wrap[data-button-styling="btn_with_preview"]').length == 0 && $('#'+$(this).attr('id') + '.nectar-slider-wrap[data-overall_style="directional"]').length == 0 ){
+    		if($arrows == 'true' && $('#'+$(this).attr('id') +' .swiper-wrapper > div').length > 1 ){
     			
     			$('.slide-count i').transition({ scale: 0.5, opacity: 0 });
     			
     			//hover event
-    			$('body').on('mouseenter','.nectar-slider-wrap[data-button-styling="btn_with_count"][data-overall_style="classic"]  .swiper-container .slider-prev, .nectar-slider-wrap[data-button-styling="btn_with_count"] .swiper-container .slider-next',function(){
+    			$('body').on('mouseenter','.swiper-container .slider-prev, .swiper-container .slider-next',function(){
     				
     				$(this).find('.slide-count i').clearQueue().stop(true,true).delay(110).transition({ scale: 1, opacity: 1 },200);
     				
@@ -2956,7 +2947,7 @@ jQuery(document).ready(function($){
     				},225,'easeOutCubic');
     			});
 
-                $('body').on('mouseleave','.nectar-slider-wrap[data-button-styling="btn_with_count"][data-overall_style="classic"] .swiper-container .slider-prev, .nectar-slider-wrap[data-button-styling="btn_with_count"] .swiper-container .slider-next',function(){
+                $('body').on('mouseleave','.swiper-container .slider-prev, .swiper-container .slider-next',function(){
                     
                     $('.slide-count i').stop(true,true).transition({ scale: 0, opacity: 0 },200);
                     
@@ -3082,367 +3073,6 @@ jQuery(document).ready(function($){
 
 
     		}
-            ////button with preview on hover
-            else if($arrows == 'true' && $('#'+$(this).attr('id') +' .swiper-wrapper > div').length > 1 && $('#'+$(this).attr('id') + '.nectar-slider-wrap[data-button-styling="btn_with_preview"]').length == 1 && $('#'+$(this).attr('id') + '.nectar-slider-wrap[data-overall_style="directional"]').length == 0){
-
-
-                function prevArrowAnimationWithPreview(e) {
-                    if($(this).hasClass('inactive')) return false;
-                    var $that = $(this);     
-
-                    //make sure the animation is complete
-                    var $timeout;
-                       
-                    clearTimeout($timeout);
-                    $timeout = setTimeout(function(){ $that.removeClass('inactive'); } ,1000);
-
-                    var $timeout2;
-                       
-                    clearTimeout($timeout2);
-                    $timeout2 = setTimeout(function(){ $that.removeClass('stophover'); } ,500);
-
-                    $(this).addClass('inactive').addClass('stophover');
-
-                    $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').prev('.swiper-slide').removeClass('prev-high-z-index');
-                    $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').stop().removeClass('prev-move');
-
-                    e.preventDefault();
-                    $nectarSliders[i].swipePrev();
-                }
-
-                function nextArrowAnimationWithPreview(e) {
-                    if($(this).hasClass('inactive')) return false;
-                    var $that = $(this);     
-
-                    //make sure the animation is complete
-                    var $timeout;
-                       
-                    clearTimeout($timeout);
-                    $timeout = setTimeout(function(){ $that.removeClass('inactive'); } ,1000);
-
-                    var $timeout2;
-                       
-                    clearTimeout($timeout2);
-                    $timeout2 = setTimeout(function(){ $that.removeClass('stophover'); } ,500);
-
-                    $(this).addClass('inactive').addClass('stophover');
-
-                    $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').next('.swiper-slide').removeClass('high-z-index');
-                    $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').stop().removeClass('next-move');
-
-                    e.preventDefault();
-                    $nectarSliders[i].swipeNext();
-                }
-
-                function darkSlideNextMouseOver(currentSlider, activeIndex) { 
-                    var $indexAdd = ($(currentSlider).find('.swiper-container').attr('data-loop') == 'true') ? 2 : 2;
-                 
-                    if($(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex + 1) +')').attr('data-color-scheme') == 'dark') {
-                        if($(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex + $indexAdd) +')').attr('data-color-scheme') == 'dark') {
-                            $(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex + $indexAdd) +') .video-texture').addClass('half-light-overlay').addClass('no-trans');
-                        }
-                        else {
-                            $(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex + $indexAdd) +') .video-texture').addClass('light-overlay').addClass('no-trans');
-                        }
-                    } else {
-                        if($(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex + $indexAdd) +')').attr('data-color-scheme') == 'light') {
-                            $(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex + $indexAdd) +') .video-texture').addClass('half-dark-overlay').addClass('no-trans');
-                        } else {
-                            $(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex + $indexAdd) +') .video-texture').addClass('dark-overlay').addClass('no-trans');
-                        }
-                    }
-                }
-                function darkSlidePrevMouseOver(currentSlider, activeIndex) { 
-                    var $indexAdd = ($(currentSlider).find('.swiper-container').attr('data-loop') == 'true') ? 0 : 0;
-                 
-                    if($(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex + 1) +')').attr('data-color-scheme') == 'dark') {
-                        if($(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex - $indexAdd) +')').attr('data-color-scheme') == 'dark') {
-                            $(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex - $indexAdd) +') .video-texture').addClass('half-light-overlay').addClass('no-trans');
-                        } else {
-                            $(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex - $indexAdd) +') .video-texture').addClass('light-overlay').addClass('no-trans');
-                        }
-                    } else {
-                        if($(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex - $indexAdd) +')').attr('data-color-scheme') == 'light') {
-                            $(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex - $indexAdd) +') .video-texture').addClass('half-dark-overlay').addClass('no-trans');
-                        } else {
-                            $(currentSlider).find('.swiper-slide:nth-child('+ (activeIndex - $indexAdd) +') .video-texture').addClass('dark-overlay').addClass('no-trans');
-                        }
-                    }
-                }
-
-
-                $('body').off('click','#'+$(this).attr('id')+' .slider-prev',prevArrowAnimationWithPreview);
-                $('body').on('click','#'+$(this).attr('id')+' .slider-prev',prevArrowAnimationWithPreview);
-
-                //next
-                $('body').off('click','#'+$(this).attr('id')+' .slider-next',  nextArrowAnimationWithPreview);
-                $('body').on('click','#'+$(this).attr('id')+' .slider-next',  nextArrowAnimationWithPreview);
-
-                //hover event
-                $('body').on('mouseenter','.nectar-slider-wrap[data-button-styling="btn_with_preview"] .swiper-container .slider-next:not(.stophover)',function(){
-                    
-                    $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').next('.swiper-slide').addClass('high-z-index');
-                    $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').stop().addClass('next-move');
-                    $(this).stop().addClass('next-arrow-move');
-                    darkSlideNextMouseOver($(this).parents('.nectar-slider-wrap'), $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').index());
-                   
-                });
-
-                $('body').on('mouseleave','.nectar-slider-wrap[data-button-styling="btn_with_preview"] .swiper-container .slider-next',function(){
-                    
-                    $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').next('.swiper-slide').removeClass('high-z-index');
-                    $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').stop().removeClass('next-move');
-                    $(this).stop().removeClass('next-arrow-move');
-                });
-
-
-                $('body').on('mouseenter','.nectar-slider-wrap[data-button-styling="btn_with_preview"] .swiper-container .slider-prev:not(.stophover)',function(){
-                    
-                    $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').prev('.swiper-slide').addClass('prev-high-z-index');
-                    $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').stop().addClass('prev-move');
-                    $(this).stop().addClass('prev-arrow-move');
-                    darkSlidePrevMouseOver($(this).parents('.nectar-slider-wrap'), $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').index());
-                });
-
-                $('body').on('mouseleave','.nectar-slider-wrap[data-button-styling="btn_with_preview"] .swiper-container .slider-prev',function(){
-                    
-                    $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').prev('.swiper-slide').removeClass('prev-high-z-index');
-                    $(this).parents('.nectar-slider-wrap').find('.swiper-slide-active').stop().removeClass('prev-move');
-                    $(this).stop().removeClass('prev-arrow-move');
-
-                });
-
-            } else if($('#'+$(this).attr('id') + '.nectar-slider-wrap[data-overall_style="directional"]').length == 1) {
-
-                function prevArrowAnimationDirectional(e) {
-                    if($(this).hasClass('inactive') || $(this).parents('.swiper-container').find('.slider-next').hasClass('inactive')) return false;
-                    var $that = $(this);     
-
-                    //cache the widths
-                    if($('#header-outer.transparent').length > 0){
-                        $('#header-outer nav > ul.sf-menu > li > a, #header-outer nav > ul.buttons > li#search-btn a, #header-outer nav > ul.buttons > li.slide-out-widget-area-toggle a > span, #header-outer .cart-icon-wrap, header#top #logo').each(function(){
-                           var $extraWidth = ($(this).find('.original .sf-sub-indicator').length > 0) ? 14: 1;
-                           $(this).find('.original').attr('data-w',$(this).find('span.original').width()+$extraWidth); 
-                        });
-                    }
-
-                   //make sure the animation is complete
-                    var $timeout;
-                       
-                    clearTimeout($timeout);
-                    $timeout = setTimeout(function(){ 
-                        
-                        $that.parents('.swiper-container').removeClass('directional-trans-prev');
-                        $that.parents('.swiper-container').find('.swiper-wrapper').transition({ 'x': 0, 'left': parseInt($that.parents('.swiper-container').find('.swiper-wrapper').css('left')) + $that.parents('.swiper-container').width() },0);
-                        setTimeout(function(){ 
-                            $nectarSliders[i].updateActiveSlide();
-                            $nectarSliders[i].fixLoop();
-                            $that.removeClass('inactive');
-                        },50);
-
-                        resetContentPos();
-                         
-                    } ,1100);
-
-                    //call the dark/light slide coloring half way through transition
-                    var $timeout2;
-                       
-                    clearTimeout($timeout2);
-                    $timeout2 = setTimeout(function(){ 
-
-                        if($that.parents('.swiper-container').attr('data-loop') != 'true') {
-                            if( $that.parents('.swiper-container').find('.swiper-slide-active').index()+1 != 1) {
-                               onChangeStart($nectarSliders[i]); 
-                            }
-                        }
-                          
-                        else {
-                            onChangeStart($nectarSliders[i]); 
-                        }
-
-                    } ,100);
-
-                     //non looped slider
-                   if($(this).parents('.swiper-container').attr('data-loop') != 'true') {
-                        
-                      
-                       if( $(this).parents('.swiper-container').find('.swiper-slide-active').index()+1 == 1 && !$('html').hasClass('no-video')){
-
-                             if( $(this).parents('.nectar-slider-wrap ').attr('data-transition') != 'fade') {
-
-                                 $(this).parents('.swiper-container').find('.swiper-wrapper').stop(true,false).css('transition','none').animate({
-                                    'left' : parseInt($(this).parents('.swiper-container').find('.swiper-wrapper').css('left')) + 20
-                                 },200,function(){
-                                    $(this).parents('.swiper-container').find('.swiper-wrapper').stop(true,false).css('transition','left,top');
-                                    $nectarSliders[i].swipeReset();
-                                 });
-                             } 
-                       }  else {
-
-                          $(this).parents('.swiper-container').find('.swiper-wrapper').find('.swiper-slide-active .content').children().each(function(i){
-                                $(this).stop().delay(i*50).transition({
-                                    'x': $that.parents('.swiper-container').width()/2.5 + "px"
-                                }, 950,'easeInOutQuart'); 
-                          });
-                       } 
-                     
-                   }
-
-                    $(this).addClass('inactive');
-
-                     //move the slide with eaising
-                    $(this).parents('.swiper-container').find('.swiper-wrapper').transition({ 'x': $(this).parents('.swiper-container').width() + "px"},1100,'easeInOutQuart');
-
-                    if($(this).parents('.swiper-container').attr('data-loop') == 'true') {
-                        $(this).parents('.swiper-container').find('.swiper-wrapper').find('.swiper-slide-active .content > *').each(function(i){
-                                $(this).stop().delay(i*50).transition({
-                                    'x': $that.parents('.swiper-container').width()/2.5 + "px"
-                                }, 950,'easeInOutQuart'); 
-                        });
-                    }
-
-                    $that.parents('.swiper-container').find('.swiper-wrapper').find('.swiper-slide-active').prev('.swiper-slide').find('.content > *').transition({
-                        'x': '-' + $that.parents('.swiper-container').width() + "px"
-                    }, 0);
-
-                    setTimeout(function(){
-                         $that.parents('.swiper-container').find('.swiper-wrapper').find('.swiper-slide-active').prev('.swiper-slide').find('.content > *').each(function(i){
-
-                            $(this).stop().delay(i*50).transition({
-                                'x': "0px"
-                            }, 750,'easeInOutQuart'); 
-                        });
-                    },200);
-
-                    $that.parents('.swiper-container').addClass('directional-trans-prev');
-
-                    e.preventDefault();
-         
-                }
-
-                function nextArrowAnimationDirectional(e) {
-                    if($(this).hasClass('inactive') || $(this).parents('.swiper-container').find('.slider-prev').hasClass('inactive')) return false;
-                    var $that = $(this);     
-
-                    //cache the widths
-                    if($('#header-outer.transparent').length > 0){
-                        $('#header-outer nav > ul.sf-menu > li > a, #header-outer nav > ul.buttons > li#search-btn a, #header-outer nav > ul.buttons > li.slide-out-widget-area-toggle a > span, #header-outer .cart-icon-wrap, header#top #logo').each(function(){
-                            var $extraWidth = ($(this).find('.original .sf-sub-indicator').length > 0) ? 14: 1;
-                            $(this).find('.original').attr('data-w',$(this).find('span.original').width()+$extraWidth); 
-                        });
-                    }
-
-                    //make sure the animation is complete
-                    var $timeout;
-                       
-                    clearTimeout($timeout);
-                    $timeout = setTimeout(function(){ 
-                        
-                        $that.parents('.swiper-container').removeClass('directional-trans-next');
-                        $that.parents('.swiper-container').find('.swiper-wrapper').transition({ 'x': 0, 'left': parseInt($that.parents('.swiper-container').find('.swiper-wrapper').css('left')) - $that.parents('.swiper-container').width() },0);
-                        setTimeout(function(){ 
-                            $nectarSliders[i].updateActiveSlide();
-                            $nectarSliders[i].fixLoop(); 
-                            $that.removeClass('inactive');
-                        },50);
-                        resetContentPos();
-
-                    } ,1100);
-
-                    //call the dark/light slide coloring half way through transition
-                    var $timeout2;
-                       
-                    clearTimeout($timeout2);
-                    $timeout2 = setTimeout(function(){ 
-
-                        if($that.parents('.swiper-container').attr('data-loop') != 'true') {
-                            if( $that.parents('.swiper-container').find('.swiper-slide-active').index()+1 != $slideNum) {
-                               onChangeStart($nectarSliders[i]); 
-                            }
-                        }
-                          
-                        else {
-                            onChangeStart($nectarSliders[i]); 
-                        }
-
-                    } ,100);
-                    
-
-
-                     var $slideNum = $(this).parents('.swiper-container').find('.swiper-wrapper > div').length;
-                    
-                    //non looped slider
-                       if($(this).parents('.swiper-container').attr('data-loop') != 'true') {
-                        
-                             if( $(this).parents('.swiper-container').find('.swiper-slide-active').index()+1 == $slideNum && !$('html').hasClass('no-video')) {
-
-                                if( $(this).parents('.nectar-slider-wrap ').attr('data-transition') != 'fade') {
-                                     $(this).parents('.swiper-container').find('.swiper-wrapper').stop(true,false).css('transition','none').animate({
-                                        'left' : parseInt($(this).parents('.swiper-container').find('.swiper-wrapper').css('left')) - 20
-                                     },200,function(){
-                                        $(this).parents('.swiper-container').find('.swiper-wrapper').stop(true,false).css('transition','left,top');
-                                        $nectarSliders[i].swipeReset();
-                                     });
-                                 }
-                            } else {
-                                 $(this).parents('.swiper-container').find('.swiper-wrapper').find('.swiper-slide-active .content > *').each(function(i){
-                                        $(this).stop().delay(i*50).transition({
-                                            'x': '-' + $that.parents('.swiper-container').width()/2.5 + "px"
-                                        }, 950,'easeInOutQuart'); 
-                                });
-                            }
-                       }
-
-                       $(this).addClass('inactive');
-
-                    
-                    //move the slide with eaising
-                    $(this).parents('.swiper-container').find('.swiper-wrapper').transition({ 'x': - $(this).parents('.swiper-container').width() + "px"},1100,'easeInOutQuart');
-
-                    if($(this).parents('.swiper-container').attr('data-loop') == 'true') {
-                        $(this).parents('.swiper-container').find('.swiper-wrapper').find('.swiper-slide-active .content > *').each(function(i){
-                                $(this).stop().delay(i*50).transition({
-                                    'x': '-' + $that.parents('.swiper-container').width()/2.5 + "px"
-                                }, 950,'easeInOutQuart'); 
-                        });
-                    }
-
-
-                    $that.parents('.swiper-container').find('.swiper-wrapper').find('.swiper-slide-active').next('.swiper-slide').find('.content > *').transition({
-                        'x': $that.parents('.swiper-container').width() + "px"
-                    }, 0);
-
-                    setTimeout(function(){
-                         $that.parents('.swiper-container').find('.swiper-wrapper').find('.swiper-slide-active').next('.swiper-slide').find('.content > *').each(function(i){
-
-                            $(this).stop().delay(i*50).transition({
-                                'x': "0px"
-                            }, 750,'easeInOutQuart'); 
-                        });
-                    },200);
-                   
-
-                    $that.parents('.swiper-container').addClass('directional-trans-next');
-
-                    e.preventDefault();
-                    
-
-                }
-
-
-                //prev
-                $('body').off('click','#'+$(this).attr('id')+' .slider-prev', prevArrowAnimationDirectional);
-                $('body').on('click','#'+$(this).attr('id')+' .slider-prev', prevArrowAnimationDirectional);
-
-                //next
-                $('body').off('click','#'+$(this).attr('id')+' .slider-next',  nextArrowAnimationDirectional);
-                $('body').on('click','#'+$(this).attr('id')+' .slider-next',  nextArrowAnimationDirectional);
-
-                function resetContentPos() {
-                    $($nectarSliders[i].container).find('.swiper-slide .content > *').transition({ 'x': '0px' }, 0); 
-                }
-
-            }
 
 
     	    //Clickable pagination
@@ -3469,72 +3099,10 @@ jQuery(document).ready(function($){
         }
     }
 
-    function directionalNavColorInit(slider) {
-        
-        if(slider.attr('data-overall_style') == 'directional' && slider.find('.swiper-slide[data-color-scheme="dark"]').length > 0 && $('#header-outer[data-transparent-header="true"]').length > 0) {
 
-            if( slider.parents('.parallax_slider_outer').length > 0 || slider.parents('.first-section').length > 0 ) {
-
-                $('#header-outer').addClass('directional-nav-effect');
-
-                $('#header-outer nav > ul.sf-menu > li > a, #header-outer nav > ul.buttons > li.slide-out-widget-area-toggle a span, #header-outer nav > ul.buttons > li#search-btn a').each(function(){
-                    var $text = $(this).html();
-                    $(this).html(' ');
-                    $(this).append('<span class="dark"><span>'+ $text + '</span></span>');
-                    $(this).append('<span class="light"><span>'+ $text + '</span></span>');
-                    $(this).append('<span class="original"><span>'+ $text + '</span></span>');
-                });
-
-                $('#header-outer .cart-outer .cart-icon-wrap').each(function(){
-                    $(this).find('> i').remove();
-                    $(this).append('<span class="dark"><span><i class="icon-salient-cart"></i></span></span>');
-                    $(this).append('<span class="light"><span><i class="icon-salient-cart"></i></span></span>');
-                    $(this).append('<span class="original"><span><i class="icon-salient-cart"></i></span></span>');
-                });
-                setTimeout(function(){
-                     $('#header-outer .cart-outer .cart-icon-wrap').each(function(){
-                        $(this).find('> i, > span').remove();
-                        $(this).append('<span class="dark"><span><i class="icon-salient-cart"></i></span></span>');
-                        $(this).append('<span class="light"><span><i class="icon-salient-cart"></i></span></span>');
-                        $(this).append('<span class="original"><span><i class="icon-salient-cart"></i></span></span>');
-                    });
-                },1000);
-
-                //logo
-                if($('header#top #logo img').length > 0) {
-                    $('header#top #logo').append('<span class="dark"><span></span></span>');
-                    $('header#top #logo').append('<span class="light"><span></span></span>');
-                    $('header#top #logo').append('<span class="original"><span></span></span>');
-                    $('header#top #logo img:first').clone().appendTo($('header#top #logo .original span'));
-                    if($('header#top #logo img.starting-logo').length > 0) $('header#top #logo img.starting-logo:not(.dark-version)').clone().appendTo($('header#top #logo .light span'));
-                    if($('header#top #logo img.starting-logo.retina.logo').length > 0) $('header#top #logo img.starting-logo.retina-logo:not(.dark-version)').clone().appendTo($('header#top #logo .light span'));
-                    if($('header#top #logo img.starting-logo.dark-version').length > 0) $('header#top #logo img.starting-logo.dark-version').clone().appendTo($('header#top #logo .dark span'));
-                    if($('header#top #logo img.starting-logo.dark-version.retina.logo').length > 0) $('header#top #logo img.starting-logo.dark-version.retina-logo').clone().appendTo($('header#top #logo .dark span'));
-                    $('header#top #logo > img').remove();
-
-                } else {
-                    var $logoText = $('header#top #logo').text();
-                    $('header#top #logo').html(' ');
-                    $('header#top #logo').append('<span class="dark"><span>'+$logoText+'</span></span>');
-                    $('header#top #logo').append('<span class="light"><span>'+$logoText+'</span></span>');
-                    $('header#top #logo').append('<span class="original"><span>'+$logoText+'</span></span>');
-                }
-
-                //retina logo fix
-                if($('.retina-logo:visible').length > 0) $('header#top #logo').css('width',$('.retina-logo').width());
-
-                //cache the widths
-                 $('#header-outer nav > ul.sf-menu > li > a, #header-outer nav > ul.buttons > li#search-btn a, #header-outer nav > ul.buttons > li.slide-out-widget-area-toggle a > span, #header-outer .cart-icon-wrap, header#top #logo').each(function(){
-                    var $extraWidth = ($(this).find('.original .sf-sub-indicator').length > 0) ? 14: 1;
-                    $(this).find('.original').attr('data-w',$(this).find('span.original').width()+$extraWidth);  
-                });
-            
-
-            }   
-        }
-    }
 
 	//initial slide load 
+
     var $animating = false;
 
     //responsive slider
@@ -3557,7 +3125,6 @@ jQuery(document).ready(function($){
 
     	$('.nectar-slider-wrap').each(function(i){
     		
-
     		var $sliderWrapCount = $('.nectar-slider-wrap').length;
     		var $that = $(this);
 
@@ -3628,26 +3195,6 @@ jQuery(document).ready(function($){
     			$('.nectar-slider-wrap .mobile-video-image').show();
     			$('.nectar-slider-wrap .video-wrap').remove();
     		}
-
-
-                if($('header#top #logo img').length > 0) {
-                  var logoImg = new Image();
-                      logoImg.src = $('header#top #logo img:first').attr('src');
-                    
-                     $(logoImg).load(function(){
-                        directionalNavColorInit($that);
-                        if($that.attr('data-overall_style') == 'directional') {
-                           $that.find('.swiper-container').addClass('directional-trans-current'); 
-                           onChangeStart($nectarSliders[i]);
-                        } 
-                    });
-                 } else {
-                    directionalNavColorInit($that);
-                    if($that.attr('data-overall_style') == 'directional') {
-                       $that.find('.swiper-container').addClass('directional-trans-current'); 
-                       onChangeStart($nectarSliders[i]);
-                    } 
-                 }
     		
     	});
 
@@ -4271,55 +3818,53 @@ jQuery(document).ready(function($){
 				
 				
 				//also show duplicate slide if applicable
-                if($($containerClass).attr('data-overall_style') != 'directional') {
-    				////first
-    				if(  $($containerClass+' .swiper-slide-active').index()+1 == $slideNum-1 ){
+				////first
+				if(  $($containerClass+' .swiper-slide-active').index()+1 == $slideNum-1 ){
 
-    					$($containerClass+' .swiper-slide:nth-child(1)').find('.content').children().each(function(i){
-    	
-    						$(this).stop().delay(i*90).animate({
-    							'opacity' : 1,
-    							'padding-top' : 0
-    						},{ duration: 400, easing: 'easeOutQuad'});	
-    					});
-    	
-    				}
-    				
-    				////last
-    				if( $($containerClass+' .swiper-slide-active').index()+1 == 2 ){
-    					$($containerClass+' .swiper-slide:nth-child('+ ($slideNum) + ')').find('.content').children().each(function(i){
-    						$(this).stop().delay(i*90).animate({
-    							'opacity' : 1,
-    							'padding-top' : 0
-    						},{ duration: 400, easing: 'easeOutQuad'});	
-    					});
-    	
-    				}
+					$($containerClass+' .swiper-slide:nth-child(1)').find('.content').children().each(function(i){
+	
+						$(this).stop().delay(i*90).animate({
+							'opacity' : 1,
+							'padding-top' : 0
+						},{ duration: 400, easing: 'easeOutQuad'});	
+					});
+	
+				}
+				
+				////last
+				if( $($containerClass+' .swiper-slide-active').index()+1 == 2 ){
+					$($containerClass+' .swiper-slide:nth-child('+ ($slideNum) + ')').find('.content').children().each(function(i){
+						$(this).stop().delay(i*90).animate({
+							'opacity' : 1,
+							'padding-top' : 0
+						},{ duration: 400, easing: 'easeOutQuad'});	
+					});
+	
+				}
 
 
-                    //looped last going to first
-                    if(  $($containerClass+' .swiper-slide-active').index()+1 == $slideNum ){
+                //looped last going to first
+                if(  $($containerClass+' .swiper-slide-active').index()+1 == $slideNum ){
 
-                       $($containerClass+' .swiper-slide:nth-child(2)').find('.content').children().each(function(i){
-        
-                            $(this).stop().delay(i*90).animate({
-                                'opacity' : 1,
-                                'padding-top' : 0
-                            },{ duration: 400, easing: 'easeOutQuad'}); 
-                        });
-                    }
+                   $($containerClass+' .swiper-slide:nth-child(2)').find('.content').children().each(function(i){
+    
+                        $(this).stop().delay(i*90).animate({
+                            'opacity' : 1,
+                            'padding-top' : 0
+                        },{ duration: 400, easing: 'easeOutQuad'}); 
+                    });
+                }
 
-                    //looped first going to last
-                    if(  $($containerClass+' .swiper-slide-active').index()+1 == 1 ){  
+                //looped first going to last
+                if(  $($containerClass+' .swiper-slide-active').index()+1 == 1 ){  
 
-                       $($containerClass+' .swiper-slide:eq(-2)').find('.content').children().each(function(i){
-        
-                            $(this).stop().delay(i*90).animate({
-                                'opacity' : 1,
-                                'padding-top' : 0
-                            },{ duration: 400, easing: 'easeOutQuad'}); 
-                        });
-                    }
+                   $($containerClass+' .swiper-slide:eq(-2)').find('.content').children().each(function(i){
+    
+                        $(this).stop().delay(i*90).animate({
+                            'opacity' : 1,
+                            'padding-top' : 0
+                        },{ duration: 400, easing: 'easeOutQuad'}); 
+                    });
                 }
 
 				
@@ -4328,45 +3873,29 @@ jQuery(document).ready(function($){
 			//play video if there's one
 			playVideoBG(currentSlide + 1, $containerClass);
 				
-
 			//fadeIn active slide
-            if($($containerClass).attr('data-overall_style') != 'directional') {
-    			$($containerClass+' .swiper-slide:nth-child('+ (currentSlide + 1) +')').find('.content').children().each(function(i){
-    				
-    				$(this).stop().delay(i*90).animate({
-    					'opacity' : 1,
-    					'padding-top' : 0
-    				},{ duration: 400, easing: 'easeOutQuad'});	
-    			});
-            }
+			$($containerClass+' .swiper-slide:nth-child('+ (currentSlide + 1) +')').find('.content').children().each(function(i){
+				
+				$(this).stop().delay(i*90).animate({
+					'opacity' : 1,
+					'padding-top' : 0
+				},{ duration: 400, easing: 'easeOutQuad'});	
+			});
 			
 		
 			
 			
-			
+			//light and dark controls
+			if($($containerClass+' .swiper-slide:nth-child('+ (currentSlide + 1) +')').attr('data-color-scheme') == 'dark') {
+				$($containerClass).find('.slider-pagination').addClass('dark-cs');
+				$($containerClass).find('.slider-prev, .slider-next').addClass('dark-cs');
+			} else {
+				$($containerClass).find('.slider-pagination').removeClass('dark-cs');
+				$($containerClass).find('.slider-prev, .slider-next').removeClass('dark-cs');
+			}
 			
 			$captionTrans++;
 			if($captionTrans == $('.swiper-wrapper').length) { $('div.first_video_slide').addClass('nulled') }
-
-
-            //slider arrows with preview effect
-            setTimeout(function(){
-
-                if($('.slider-next').hasClass('next-arrow-move')) {
-                    $('.nectar-slider-wrap[data-button-styling="btn_with_preview"] .swiper-container .slider-next').trigger('mouseenter');
-                } else if($('.slider-prev').hasClass('prev-arrow-move')) {
-                    $('.nectar-slider-wrap[data-button-styling="btn_with_preview"] .swiper-container .slider-prev').trigger('mouseenter');
-                }
-
-
-               if($($containerClass).attr('data-button-styling') == 'btn_with_preview') {     
-                 $($containerClass+' .swiper-slide').addClass('prev-high-z-index-static');
-                 $($containerClass+' .swiper-slide.swiper-slide-active').removeClass('prev-high-z-index-static');
-               }
-
-            },175);
-
-           
 			
 			
 	} 
@@ -4520,7 +4049,6 @@ jQuery(document).ready(function($){
     		if(typeof $autoplayVal !='undefined' && $autoplayVal.length != '0' && parseInt($autoplayVal)) { 
     			nectarSlideRotateInit($that,$autoplayVal,$sliderNum);
     		}	
-
     	});
     }
     autorotateInit();
@@ -4534,11 +4062,6 @@ jQuery(document).ready(function($){
 		$('#'+slider.attr('id') + ' a.slider-prev, #'+slider.attr('id') + ' a.slider-next, #' + slider.attr('id') + ' .slider-pagination span').click(function(e){ 
 			if(typeof e.clientY != 'undefined'){
 				clearInterval(autoplay[$('#'+slider.attr('id')).attr('autoplay-id')]); 
-
-                //class for directional
-                if( $('#'+slider.attr('id')).parent().hasClass('parallax_slider_outer') && $('#'+slider.attr('id')).attr('data-overall_style') == 'directional' ) {
-                     $('#'+slider.attr('id')).parent().addClass('user-stopped');
-                }
 			}
 		});
 		
@@ -4547,50 +4070,16 @@ jQuery(document).ready(function($){
 	
 	function nectarSlideRotate(slider, sliderNum){
 
-        //non looped
 		if($nectarSliders[sliderNum].activeIndex + 1 < $(slider).find('.swiper-wrapper > div.swiper-slide').length){
-			
-            //btn with preview hover effect clear
-            if($(slider).attr('data-button-styling') == 'btn_with_preview') {    
-                $(slider).find('.swiper-slide').removeClass('high-z-index').removeClass('prev-high-z-index');
-                $(slider).find('.swiper-slide').removeClass('next-move').removeClass('prev-move');
-            }
-
-            //classic style
-            if($(slider).attr('data-overall_style') != 'directional') {
-                $nectarSliders[sliderNum].swipeNext();
-            } else {
-                //directional based
-                $($nectarSliders[sliderNum].container).find('.slider-next').trigger('click');
-            }
-    
+			$nectarSliders[sliderNum].swipeNext();
 		} else {
             //looped sliders
             if($(slider).find('.swiper-container').is("[data-loop]") && $(slider).find('.swiper-container').attr('data-loop') == 'true') {
-
-                //classic style
-                if($(slider).attr('data-overall_style') != 'directional') {
-                    $nectarSliders[sliderNum].swipeNext();
-                } else {
-                    //directional based
-                   $($nectarSliders[sliderNum].container).find('.slider-next').trigger('click');
-                } 
-
+                $nectarSliders[sliderNum].swipeNext();
             } 
             //regular sliders
             else {
-
-                if($(slider).attr('data-overall_style') != 'directional') {
-                    $nectarSliders[sliderNum].swipeTo(0,800);
-                } else {
-                    $(slider).find('.swiper-container').addClass('directional-trans-prev');
-                    $nectarSliders[sliderNum].swipeTo(0,800);
-                    //call the dark/light slide coloring half way through transition
-                    var $timeout2;     
-                    clearTimeout($timeout2);
-                    $timeout2 = setTimeout(function(){ onChangeStart($nectarSliders[sliderNum]); } ,100);
-                }
-               
+                $nectarSliders[sliderNum].swipeTo(0,800);
             }
 		}
 	}
@@ -4606,7 +4095,7 @@ jQuery(document).ready(function($){
 	 
 	var animationQueue = null;
 	
-	function onChangeStart(e){
+	function sliderArrowCount(e){
 		
 		//cache slider obj
 		var $obj = e;
@@ -4614,166 +4103,20 @@ jQuery(document).ready(function($){
 		$animating = true;
 		
 		 var $slideNum = $($obj.container).find('.swiper-wrapper > div').length;
-		
-        //one for effects and one for basic slide arrow count 
-		$activeIndex = ($($obj.container).attr('data-loop') == 'true') ? $obj.activeIndex + 1: $obj.activeIndex+1;
-        $activeIndex2 = ($($obj.container).attr('data-loop') == 'true') ? $obj.activeIndex: $obj.activeIndex+1;
-
+		 
+		$activeIndex = ($($obj.container).attr('data-loop') == 'true') ? $obj.activeIndex : $obj.activeIndex + 1;
+		 
 		//dark slide header 
-        if($($obj.container).parent().attr('data-overall_style') != 'directional') {
-            if( $($obj.container).parents('.parallax_slider_outer').length > 0 && $($obj.container).find('.swiper-slide-active[data-color-scheme="dark"]').length > 0 ||
-                $($obj.container).parents('.first-section').length > 0 && $($obj.container).find('.swiper-slide-active[data-color-scheme="dark"]').length > 0) {
-                $('#header-outer').addClass('dark-slide');
-            } else {
-                $('#header-outer').removeClass('dark-slide');
-            }
-        } 
-        ////directional trans - will be called early so need to adjust the slide being looked for
-        else {
-            if($($obj.container).hasClass('directional-trans-next')) {
- 
-                if( $($obj.container).parents('.parallax_slider_outer').length > 0 && $($obj.container).find('.swiper-slide-active').next('.swiper-slide').is('[data-color-scheme="dark"]') ||
-                    $($obj.container).parents('.first-section').length > 0 && $($obj.container).find('.swiper-slide-active').next('.swiper-slide').is('[data-color-scheme="dark"]') ) {
-                    $('#header-outer').addClass('dark-slide');
-                    //nav items animation 
-                    if($('body.mobile').length == 0) { 
-                        $('#header-outer nav > ul.sf-menu > li > a, #header-outer nav > ul.buttons > li#search-btn a, #header-outer nav > ul.buttons > li.slide-out-widget-area-toggle a > span, #header-outer .cart-icon-wrap, header#top #logo').each(function(){
-                            var $itemWidth = parseInt($(this).find('span.original').attr('data-w'));
-
-                            $(this).find('span.dark').css('display','inline').transition({'margin-left': '0'},0).transition({ 'width' :  $itemWidth }, 325, 'easeInOutQuart');
-                            $(this).find('span.dark > span').transition({'margin-left': '0'},0);
-                            $(this).find('span.light').css('display','inline-block').transition({'margin-left': $itemWidth, 'width' :  '0' }, 325, 'easeInOutQuart');
-                            $(this).find('span.light > span').transition({'margin-left': '-' + ($itemWidth) + 'px', 'width' :  $itemWidth }, 325, 'easeInOutQuart');
-                        });
-                    }
-                } else {
-                    $('#header-outer').removeClass('dark-slide');
-                     //nav items animation 
-                     if($('body.mobile').length == 0) { 
-                        $('#header-outer nav > ul.sf-menu > li > a, #header-outer nav > ul.buttons > li#search-btn a, #header-outer nav > ul.buttons > li.slide-out-widget-area-toggle a > span, #header-outer .cart-icon-wrap, header#top #logo').each(function(){
-                            var $itemWidth = parseInt($(this).find('span.original').attr('data-w'));
-
-                            $(this).find('span.light').css('display','inline').transition({'margin-left': '0'},0).css('display','inline').transition({'width' :  $itemWidth }, 325, 'easeInOutQuart');
-                            $(this).find('span.light > span').transition({'margin-left': '0'},0);
-                            $(this).find('span.dark').css('display','inline-block').transition({'margin-left': $itemWidth, 'width' :  '0' }, 325, 'easeInOutQuart');
-                            $(this).find('span.dark > span').transition({'margin-left':  '-' + ($itemWidth) + 'px', 'width' :  $itemWidth }, 325, 'easeInOutQuart');
-                        });
-                    }
-                }
-            } 
-
-            else if($($obj.container).hasClass('directional-trans-prev')) {
-                 if( $($obj.container).parents('.parallax_slider_outer').length > 0 && $($obj.container).find('.swiper-slide-active').prev('.swiper-slide').is('[data-color-scheme="dark"]') ||
-                    $($obj.container).parents('.first-section').length > 0 && $($obj.container).find('.swiper-slide-active').prev('.swiper-slide').is('[data-color-scheme="dark"]') ) {
-                    $('#header-outer').addClass('dark-slide');
-                     //nav items animation 
-                     if($('body.mobile').length == 0) { 
-                        $('#header-outer nav > ul.sf-menu > li > a, #header-outer nav > ul.buttons > li#search-btn a, #header-outer nav > ul.buttons > li.slide-out-widget-area-toggle a > span, #header-outer .cart-icon-wrap, header#top #logo').each(function(){
-                            var $itemWidth = parseInt($(this).find('span.original').attr('data-w'));
-
-                            $(this).find('span.dark').css('display','inline').transition({'margin-left': '0'},0).transition({ 'width' :  $itemWidth }, 325, 'easeInOutQuart');
-                            $(this).find('span.dark > span').transition({'margin-left': '0'},0);
-                            $(this).find('span.light').css('display','inline-block').transition({'margin-left':  $itemWidth, 'width' :  '0' }, 325, 'easeInOutQuart');
-                            $(this).find('span.light > span').transition({'margin-left':  '-' + ($itemWidth) + 'px', 'width' :  $itemWidth }, 325, 'easeInOutQuart');
-                        });
-                    }
-                } else {
-                    $('#header-outer').removeClass('dark-slide');
-                     //nav items animation 
-                     if($('body.mobile').length == 0) { 
-                        $('#header-outer nav > ul.sf-menu > li > a, #header-outer nav > ul.buttons > li#search-btn a, #header-outer nav > ul.buttons > li.slide-out-widget-area-toggle a > span, #header-outer .cart-icon-wrap, header#top #logo').each(function(){
-                            var $itemWidth = parseInt($(this).find('span.original').attr('data-w'));
-
-                            $(this).find('span.light').css('display','inline').transition({'margin-left': '0'},0).transition({'width' : $itemWidth }, 325, 'easeInOutQuart');
-                            $(this).find('span.light > span').transition({'margin-left': '0'},0);
-                            $(this).find('span.dark').css('display','inline-block').transition({'margin-left': $itemWidth, 'width' :  '0' }, 325, 'easeInOutQuart');
-                            $(this).find('span.dark > span').transition({'margin-left': '-' + ($itemWidth) + 'px', 'width' :  $itemWidth }, 325, 'easeInOutQuart');
-                        });
-                    }
-                }
-            }
-
-            else if($($obj.container).hasClass('directional-trans-current')) {
-                 if( $($obj.container).parents('.parallax_slider_outer').length > 0 && $($obj.container).find('.swiper-slide-active').is('[data-color-scheme="dark"]') ||
-                    $($obj.container).parents('.first-section').length > 0 && $($obj.container).find('.swiper-slide-active').is('[data-color-scheme="dark"]') ) {
-                    $('#header-outer').addClass('dark-slide');
-                     //nav items animation 
-                     if($('body.mobile').length == 0) { 
-                        $('#header-outer nav > ul.sf-menu > li > a, #header-outer nav > ul.buttons > li#search-btn a, #header-outer nav > ul.buttons > li.slide-out-widget-area-toggle a > span, #header-outer .cart-icon-wrap, header#top #logo').each(function(){
-                            var $itemWidth = parseInt($(this).find('span.original').attr('data-w'));
-
-                            $(this).find('span.dark').css('display','inline').transition({'margin-left': '0'},0).transition({ 'width' :  $itemWidth }, 325, 'easeInOutQuart');
-                            $(this).find('span.dark > span').transition({'margin-left': '0'},0);
-                            $(this).find('span.light').css('display','inline-block').transition({'margin-left':  $itemWidth, 'width' :  '0' }, 325, 'easeInOutQuart');
-                            $(this).find('span.light > span').transition({'margin-left':  '-' + ($itemWidth) + 'px', 'width' :  $itemWidth }, 325, 'easeInOutQuart');
-                        });
-                    }
-                } else {
-                    $('#header-outer').removeClass('dark-slide');
-                     //nav items animation 
-                     if($('body.mobile').length == 0) { 
-                        $('#header-outer nav > ul.sf-menu > li > a, #header-outer nav > ul.buttons > li#search-btn a, #header-outer nav > ul.buttons > li.slide-out-widget-area-toggle a > span, #header-outer .cart-icon-wrap, header#top #logo').each(function(){
-                            var $itemWidth = parseInt($(this).find('span.original').attr('data-w'));
-
-                            $(this).find('span.light').css('display','inline').transition({'margin-left': '0'},0).transition({'width' : $itemWidth }, 325, 'easeInOutQuart');
-                            $(this).find('span.light > span').transition({'margin-left': '0'},0);
-                            $(this).find('span.dark').css('display','inline-block').transition({'margin-left': $itemWidth, 'width' :  '0' }, 325, 'easeInOutQuart');
-                            $(this).find('span.dark > span').transition({'margin-left': '-' + ($itemWidth) + 'px', 'width' :  $itemWidth }, 325, 'easeInOutQuart');
-                        });
-                    }
-                }
-            }
-
-
+        if( $($obj.container).parents('.parallax_slider_outer').length > 0 && $($obj.container).find('.swiper-slide-active[data-color-scheme="dark"]').length > 0 ||
+            $($obj.container).parents('.first-section').length > 0 && $($obj.container).find('.swiper-slide-active[data-color-scheme="dark"]').length > 0) {
+            $('#header-outer').addClass('dark-slide');
+        } else {
+            $('#header-outer').removeClass('dark-slide');
         }
-
-        //light and dark controls
-        if($($obj.container).parent().attr('data-overall_style') != 'directional') {
-            if($($obj.container).find('.swiper-slide:nth-child('+ ($activeIndex) +')').attr('data-color-scheme') == 'dark') {
-                $($obj.container).find('.slider-pagination').addClass('dark-cs');
-                $($obj.container).find('.slider-prev, .slider-next').addClass('dark-cs');
-            } else {
-               $($obj.container).find('.slider-pagination').removeClass('dark-cs');
-               $($obj.container).find('.slider-prev, .slider-next').removeClass('dark-cs');
-            }
-        } 
-        ////directional trans - will be called early so need to adjust the slide being looked for
-        else {
-            if($($obj.container).hasClass('directional-trans-next')) {
-                if($($obj.container).find('.swiper-slide:nth-child('+ ($activeIndex+1) +')').attr('data-color-scheme') == 'dark') {
-                    $($obj.container).find('.slider-pagination').addClass('dark-cs');
-                    $($obj.container).find('.slider-prev, .slider-next').addClass('dark-cs');
-                } else {
-                   $($obj.container).find('.slider-pagination').removeClass('dark-cs');
-                   $($obj.container).find('.slider-prev, .slider-next').removeClass('dark-cs');
-                }
-            } else if($($obj.container).hasClass('directional-trans-prev')) {
-                if($($obj.container).find('.swiper-slide:nth-child('+ ($activeIndex-1) +')').attr('data-color-scheme') == 'dark') {
-                    $($obj.container).find('.slider-pagination').addClass('dark-cs');
-                    $($obj.container).find('.slider-prev, .slider-next').addClass('dark-cs');
-                } else {
-                   $($obj.container).find('.slider-pagination').removeClass('dark-cs');
-                   $($obj.container).find('.slider-prev, .slider-next').removeClass('dark-cs');
-                }
-            
-            } else if($($obj.container).hasClass('directional-trans-current')) {
-                if($($obj.container).find('.swiper-slide:nth-child('+ ($activeIndex) +')').attr('data-color-scheme') == 'dark') {
-                    $($obj.container).find('.slider-pagination').addClass('dark-cs');
-                    $($obj.container).find('.slider-prev, .slider-next').addClass('dark-cs');
-                } else {
-                   $($obj.container).find('.slider-pagination').removeClass('dark-cs');
-                   $($obj.container).find('.slider-prev, .slider-next').removeClass('dark-cs');
-                }
-            
-            }
-        }
-
-
-        $($obj.container).find('.swiper-slide .video-texture').removeClass('no-trans').removeClass('light-overlay').removeClass('dark-overlay').removeClass('half-dark-overlay').removeClass('half-light-overlay');
 
 		//add slide counts
-		$($obj.container).find('.slider-prev .slide-count .slide-current').html( $activeIndex2 );
-		$($obj.container).find('.slider-next .slide-count .slide-current').html( $activeIndex2 );
+		$($obj.container).find('.slider-prev .slide-count .slide-current').html( $activeIndex );
+		$($obj.container).find('.slider-next .slide-count .slide-current').html( $activeIndex );
 		
 		if($($obj.container).attr('data-loop') == 'true'){
 			//duplicate first slide
@@ -4808,28 +4151,16 @@ jQuery(document).ready(function($){
 		
 
 		clearTimeout(animationQueue);
-		animationQueue = setTimeout(function(){ $animating = false; $('.swiper-slide').removeClass('duplicate-transition'); },800);
-
-
-
+		animationQueue = setTimeout(function(){ $animating = false; $('.swiper-slide').removeClass('duplicate-transition'); },800)	
+		
 	}
 	
 	
-
-
 	//functions to add or remove slider for webkit parallax fix
 	function hideSlider() {
 		if( $(window).scrollTop()/($sliderHeight + portfolioHeaderHeight + 125) >= 1){
 			$('.parallax_slider_outer .nectar-slider-wrap, .project-title.parallax-effect').css('visibility','hidden').hide();
-			$('.parallax_slider_outer').removeClass('element-in-view').addClass('element-out-of-view');
-
-            //directional slider autorotate clear
-            if($('.parallax_slider_outer .nectar-slider-wrap[data-overall_style="directional"]').length > 0) {
-                var $autoplayVal = $('.parallax_slider_outer .nectar-slider-wrap[data-overall_style="directional"]').attr('data-autorotate');
-                if(typeof $autoplayVal !='undefined' && $autoplayVal.length != '0' && parseInt($autoplayVal)) { 
-                    clearInterval( autoplay[$('.parallax_slider_outer .nectar-slider-wrap').attr('autoplay-id')] ); 
-                }
-            }
+			$('.parallax_slider_outer').removeClass('element-in-view');
 
 			$(window).on('scroll',showSlider);
 			$(window).off('scroll',hideSlider);
@@ -4841,16 +4172,6 @@ jQuery(document).ready(function($){
 
 			$('.parallax_slider_outer .nectar-slider-wrap, .project-title.parallax-effect').css('visibility','visible').show();
 			$('.parallax_slider_outer').addClass('element-in-view');
-
-            //directional slider autorotate restart
-            if($('.parallax_slider_outer .nectar-slider-wrap[data-overall_style="directional"]').length > 0 && $('.parallax_slider_outer.element-out-of-view').length > 0 && $('.parallax_slider_outer.user-stopped').length == 0) {
-                var $autoplayVal = $('.parallax_slider_outer .nectar-slider-wrap[data-overall_style="directional"]').attr('data-autorotate');
-                if(typeof $autoplayVal !='undefined' && $autoplayVal.length != '0' && parseInt($autoplayVal)) { 
-                    nectarSlideRotateInit($('.parallax_slider_outer .nectar-slider-wrap'),$autoplayVal,0);
-                } 
-            }  
-
-            $('.parallax_slider_outer').removeClass('element-out-of-view');
 
 			//resize iframes incase user resized window when out of view
 			$('.swiper-slide iframe[data-aspectRatio]').each(function() {
@@ -5145,7 +4466,6 @@ jQuery(document).ready(function($){
 											<div class="pp_hoverContainer"> \
 											</div> \
 											<div id="pp_full_res"></div> \
-                                            <p class="pp_description"></p> \
 										</div> \
 									</div> \
 								</div> \
@@ -5157,6 +4477,9 @@ jQuery(document).ready(function($){
 		});
 		
 	}
+	
+	
+	
 	
 	
 

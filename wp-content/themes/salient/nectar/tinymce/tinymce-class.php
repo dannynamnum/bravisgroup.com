@@ -30,6 +30,7 @@ function enqueue_generator_scripts(){
 add_action('admin_enqueue_scripts','enqueue_generator_scripts');
 
 
+
  
 add_action('admin_footer','content_display');
 
@@ -343,15 +344,6 @@ $nectar_shortcodes['nectar_slider'] = array(
 			'values' => array(
 				'slide' => 'slide',
 				'fade' => 'fade'
-			)
-		),
-		'slider_button_styling'=>array(
-			'type'=>'select', 
-			'desc' => 'Slider Next/Prev Button Styling',
-			'title'  => __('Slider Transition',NECTAR_THEME_NAME),
-			'values' => array(
-				'btn_with_count' => 'Standard With Slide Count On Hover',
-				'btn_with_preview' => 'Next/Prev Slide Preview On Hover'
 			)
 		),
 		'button_sizing'=>array(

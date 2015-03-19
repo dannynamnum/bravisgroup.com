@@ -26,7 +26,7 @@ function nectar_typography() {
 	
 	( intval( substr($options['body_font_size'],0,-2) ) > 8 ) ? $line_height =  intval(substr($options['body_font_size'],0,-2)) * 1.8 .'px' : $line_height = null ;  ?>
 	
-	<?php echo 'body, .toggle h3 a, body .ui-widget, table, .bar_graph li span strong, #slide-out-widget-area .tagcloud a, #search-results .result .title span, .woocommerce ul.products li.product h3, .woocommerce-page ul.products li.product h3, body .nectar-love span, body .nectar-social .nectar-love .nectar-love-count, body .carousel-heading h2 
+	<?php echo 'body, .toggle h3 a, body .ui-widget, table, .bar_graph li span strong, #search-results .result .title span, .woocommerce ul.products li.product h3, .woocommerce-page ul.products li.product h3, body .nectar-love span, body .nectar-social .nectar-love .nectar-love-count, body .carousel-heading h2 
 	{'; ?>
 		<?php if($options['body_font'] != '-') {
 			$font_family = (1 === preg_match('~[0-9]~', $options['body_font'])) ? '"'. $options['body_font'] .'"' : $options['body_font'];
@@ -455,8 +455,7 @@ function nectar_typography() {
 	
 	( intval( substr($options['i_font_size'],0,-2) ) > 8 ) ? $line_height =  intval(substr($options['i_font_size'],0,-2)) +10 .'px' : $line_height = null ;  ?>
 	
-	<?php echo 'body i, body em, .masonry.meta_overlaid article.post .post-header .meta-author > span, #post-area.masonry.meta_overlaid article.post .post-meta .date,
-	#post-area.masonry.meta_overlaid article.post.quote .quote-inner .author, #post-area.masonry.meta_overlaid  article.post.link .post-content .destination
+	<?php echo 'body i, body em
 	{'; ?>	
 		<?php if($options['i_font'] != '-') {
 			  $font_family = (1 === preg_match('~[0-9]~', $options['i_font'])) ? '"'. $options['i_font'] .'"' : $options['i_font'];
@@ -831,8 +830,7 @@ function nectar_typography() {
 	
 	<?php echo '#footer-outer .widget h4, #sidebar h4, #call-to-action .container a, .uppercase, .nectar-button, body .widget_calendar table th, body #footer-outer #footer-widgets .col .widget_calendar table th, .swiper-slide .button a,
 	header#top nav > ul > li.megamenu > ul > li > a, .carousel-heading h2, body .gform_wrapper .top_label .gfield_label, body .vc_pie_chart .wpb_pie_chart_heading, #infscr-loading div, #page-header-bg .author-section a, .ascend input[type="submit"], .ascend button[type="submit"],
-	.widget h4, .text-on-hover-wrap .categories a, .text_on_hover.product .add_to_cart_button, .woocommerce-page div[data-project-style="text_on_hover"] .single_add_to_cart_button, .woocommerce div[data-project-style="text_on_hover"]  .cart .quantity input.qty, .woocommerce-page #respond input#submit,
-	.meta_overlaid article.post .post-header h2, .meta_overlaid article.post.quote .post-content h2, .meta_overlaid article.post.link .post-content h2, .meta_overlaid article.post.format-status .post-content h2, .meta_overlaid article .meta-author a
+	.widget h4, .text-on-hover-wrap .categories a, .text_on_hover.product .add_to_cart_button, .woocommerce-page div[data-project-style="text_on_hover"] .single_add_to_cart_button, .woocommerce div[data-project-style="text_on_hover"]  .cart .quantity input.qty, .woocommerce-page #respond input#submit
 	{'; ?>	
 		<?php if($options['sidebar_footer_h_font'] != '-') {
 			   $font_family = (1 === preg_match('~[0-9]~', $options['sidebar_footer_h_font'])) ? '"'. $options['sidebar_footer_h_font'] .'"' : $options['sidebar_footer_h_font'];

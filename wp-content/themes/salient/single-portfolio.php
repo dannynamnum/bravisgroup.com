@@ -84,52 +84,9 @@ $full_width_portfolio = (!empty($fwp) && $fwp == 'enabled') ? 'id="full_width_po
 										<li id="all-items"><a href="<?php echo $portfolio_link; ?>"><i class="icon-salient-back-to-all"></i></a></li>  
 									</ul>
 
-									<ul class="controls">    
-										<?php 
-										if(!empty($options['portfolio_same_category_single_nav']) && $options['portfolio_same_category_single_nav'] == '1') { 
-
-											// get_posts in same custom taxonomy
-											$terms = get_the_terms($post->id,"project-type");
-											$project_cat = null;
-											
-										    if(empty($terms)) $terms = array('1' => (object) array('name' => 'nothing'));
-											
-									     	foreach ( $terms as $term ) {
-									      	 	$project_cat = strtolower($term->name);
-									     	}
-
-											$postlist_args = array(
-											   'posts_per_page'  => -1,
-											   'orderby'         => 'menu_order title',
-											   'order'           => 'ASC',
-											   'post_type'       => 'portfolio',
-											   'project-type' => $project_cat
-											); 
-											$postlist = get_posts( $postlist_args );
-
-											// get ids of posts retrieved from get_posts
-											$ids = array();
-											foreach ($postlist as $thepost) {
-											   $ids[] = $thepost->ID;
-											}
-
-											// get and echo previous and next post in the same taxonomy        
-											$thisindex = array_search($post->ID, $ids);
-											
-											$previd = (isset($ids[$thisindex-1])) ? $ids[$thisindex-1] : null;
-											$nextid = (isset($ids[$thisindex+1])) ? $ids[$thisindex+1] : null;
-											if ( !empty($previd) ) {
-											   echo '<li id="prev-link" class="from-sing"><a href="' . get_permalink($previd). '"><i class="icon-salient-left-arrow-thin"></i></a></li>';
-											}
-											if ( !empty($nextid) ) {
-											   echo '<li id="next-link" class="from-sing"><a href="' . get_permalink($nextid). '"><i class="icon-salient-right-arrow-thin"></i></a></li>';
-											} 
-
-											
-										} else { ?>
-											<li id="prev-link"><?php next_post_link('%link','<i class="icon-salient-left-arrow-thin"></i>'); ?></li>
-											<li id="next-link"><?php previous_post_link('%link','<i class="icon-salient-right-arrow-thin"></i>'); ?></li> 
-										<?php } ?>                                   
+									<ul class="controls">                                       
+										<li id="prev-link"><?php next_post_link('%link','<i class="icon-salient-left-arrow-thin"></i>'); ?></li>
+										<li id="next-link"><?php previous_post_link('%link','<i class="icon-salient-right-arrow-thin"></i>'); ?></li> 
 									</ul>
 								</div>
 						 <?php } ?>

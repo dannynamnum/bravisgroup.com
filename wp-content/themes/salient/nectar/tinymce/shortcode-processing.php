@@ -354,9 +354,8 @@ function nectar_full_width_section($atts, $content = null) {
 
     <div class="col span_12 '.strtolower($text_color).'">'.do_shortcode($content).'</div></div>';
 }
-if (!class_exists('WPBakeryVisualComposerAbstract') || class_exists('WPBakeryVisualComposerAbstract') && !defined('SALIENT_VC_ACTIVE')) {
-	add_shortcode('full_width_section', 'nectar_full_width_section');
-}
+add_shortcode('full_width_section', 'nectar_full_width_section');
+
 
 //image with animation
 function nectar_image_with_animation($atts, $content = null) { 
@@ -378,19 +377,18 @@ function nectar_image_with_animation($atts, $content = null) {
 		
 		if(!empty($img_link) && empty($img_link_large)) {
 			
-			return '<a href="'.$img_link.'" target="'.$img_link_target.'" class="'.$alignment.'"><img class="img-with-animation '.$el_class.'" data-delay="'.$delay.'" height="100%" width="100%" data-animation="'.strtolower($parsed_animation).'" src="'.$image_url.'" alt="'.$alt_tag.'" /></a>';
+			return '<a href="'.$img_link.'" target="'.$img_link_target.'" class="'.$alignment.'"><img class="img-with-animation '.$el_class.'" data-delay="'.$delay.'" data-animation="'.strtolower($parsed_animation).'" src="'.$image_url.'" alt="'.$alt_tag.'" /></a>';
 			
 		} elseif(!empty($img_link_large)) {
 			
-			return '<a href="'.$image_url.'" class="pp '.$alignment.'"><img class="img-with-animation '.$el_class.'" data-delay="'.$delay.'" height="100%" width="100%" data-animation="'.strtolower($parsed_animation).'" src="'.$image_url.'" alt="'.$alt_tag.'" /></a>';
+			return '<a href="'.$image_url.'" class="pp '.$alignment.'"><img class="img-with-animation '.$el_class.'" data-delay="'.$delay.'" data-animation="'.strtolower($parsed_animation).'" src="'.$image_url.'" alt="'.$alt_tag.'" /></a>';
 		}
 		
 	} else {
-		return '<div class="img-with-aniamtion-wrap '.$alignment.'"><img class="img-with-animation '.$el_class.'" data-delay="'.$delay.'" height="100%" width="100%" data-animation="'.strtolower($parsed_animation).'" src="'.$image_url.'" alt="'.$alt_tag.'" /></div>';
+		return '<div class="img-with-aniamtion-wrap '.$alignment.'"><img class="img-with-animation '.$el_class.'" data-delay="'.$delay.'" data-animation="'.strtolower($parsed_animation).'" src="'.$image_url.'" alt="'.$alt_tag.'" /></div>';
 	}
    
 }
-
 add_shortcode('image_with_animation', 'nectar_image_with_animation');
 
 
@@ -401,9 +399,7 @@ function nectar_testimonial_slider($atts, $content = null) {
 	
     return '<div class="col span_12 testimonial_slider" data-autorotate="'.$autorotate.'"><div class="slides">'.do_shortcode($content).'</div></div>';
 }
-if (!class_exists('WPBakeryVisualComposerAbstract') || class_exists('WPBakeryVisualComposerAbstract') && !defined('SALIENT_VC_ACTIVE')) {
-	add_shortcode('testimonial_slider', 'nectar_testimonial_slider');
-}
+add_shortcode('testimonial_slider', 'nectar_testimonial_slider');
 
 //testimonial 
 function nectar_testimonial($atts, $content = null) { 
@@ -411,9 +407,8 @@ function nectar_testimonial($atts, $content = null) {
 	
     return '<blockquote><p>"'.$quote.'"</p>'. '<span>&minus; '.$name.'</span></blockquote>';
 }
-if (!class_exists('WPBakeryVisualComposerAbstract') || class_exists('WPBakeryVisualComposerAbstract') && !defined('SALIENT_VC_ACTIVE')) {
-	add_shortcode('testimonial', 'nectar_testimonial');
-}
+add_shortcode('testimonial', 'nectar_testimonial');
+
 
 
 //heading
@@ -747,16 +742,13 @@ function nectar_carousel($atts, $content = null) {
 	
     return $carousel_html . do_shortcode($content) . '</ul></div>';
 }
-if (!class_exists('WPBakeryVisualComposerAbstract') || class_exists('WPBakeryVisualComposerAbstract') && !defined('SALIENT_VC_ACTIVE')) {
-	add_shortcode('carousel', 'nectar_carousel');
-}
+add_shortcode('carousel', 'nectar_carousel');
 
 function nectar_carousel_item($atts, $content = null) {  
     return '<li class="col span_4">' . do_shortcode($content) . '</li>';
 }
-if (!class_exists('WPBakeryVisualComposerAbstract') || class_exists('WPBakeryVisualComposerAbstract') && !defined('SALIENT_VC_ACTIVE')) {
-	add_shortcode('item', 'nectar_carousel_item');
-}
+add_shortcode('item', 'nectar_carousel_item');
+
 
 
 //clients
@@ -798,9 +790,7 @@ function nectar_clients($atts, $content = null) {
 	
     return $opening . do_shortcode($content) . $closing;
 }
-if (!class_exists('WPBakeryVisualComposerAbstract') || class_exists('WPBakeryVisualComposerAbstract') && !defined('SALIENT_VC_ACTIVE')) {
-	add_shortcode('clients', 'nectar_clients');
-}
+add_shortcode('clients', 'nectar_clients');
 
 function nectar_client($atts, $content = null) {
 	extract(shortcode_atts(array("image" => "", "url" => '#', "alt" => ""), $atts));
@@ -822,9 +812,8 @@ function nectar_client($atts, $content = null) {
 	}
     return $client_content;
 }
-if (!class_exists('WPBakeryVisualComposerAbstract') || class_exists('WPBakeryVisualComposerAbstract') && !defined('SALIENT_VC_ACTIVE')) {
-	add_shortcode('client', 'nectar_client');
-}
+add_shortcode('client', 'nectar_client');
+
 
 
 
@@ -850,9 +839,7 @@ function nectar_pricing_table($atts, $content = null) {
 	
     return '<div class="row pricing-table '.$column_class.'">' . do_shortcode($content) . '</div>';
 }
-if (!class_exists('WPBakeryVisualComposerAbstract') || class_exists('WPBakeryVisualComposerAbstract') && !defined('SALIENT_VC_ACTIVE')) {
-	add_shortcode('pricing_table', 'nectar_pricing_table');
-}
+add_shortcode('pricing_table', 'nectar_pricing_table');
 
 function nectar_pricing_column($atts, $content = null) {
 	extract(shortcode_atts(array("title"=>'Column title', "highlight" => 'false', "highlight_reason" => 'Most Popular', 'color' => 'Accent-Color', "price" => "99", "currency_symbol" => '$', "interval" => 'Per Month'), $atts));
@@ -871,9 +858,7 @@ function nectar_pricing_column($atts, $content = null) {
 				<h4> <span class="dollar-sign">'.$currency_symbol.'</span> '.$price.' </h4>
 				<span class="interval">'.$interval.'</span>' . do_shortcode($content) . '</div></div>';
 }
-if (!class_exists('WPBakeryVisualComposerAbstract') || class_exists('WPBakeryVisualComposerAbstract') && !defined('SALIENT_VC_ACTIVE')) {
-	add_shortcode('pricing_column', 'nectar_pricing_column');
-}
+add_shortcode('pricing_column', 'nectar_pricing_column');
 
 
 
@@ -889,13 +874,13 @@ function nectar_tabs($atts, $content = null) {
 			$panes[] = '<div id="'.$tab['id'].'">'.$tab['content'].'</div>';
 		}
 		
-		$return = '<div class="tabbed vc_clearfix"><ul>'.implode( "\n", $tabs ).'</ul>'.implode( "\n", $panes )."</div>\n";
+		$return = '<div class="tabbed"><ul>'.implode( "\n", $tabs ).'</ul><div class="clear"></div>'.implode( "\n", $panes )."</div>\n";
 	}
 	return $return;
 }
-if (!class_exists('WPBakeryVisualComposerAbstract') || class_exists('WPBakeryVisualComposerAbstract') && !defined('SALIENT_VC_ACTIVE')) {
-	add_shortcode('tabbed_section', 'nectar_tabs');
-}
+
+add_shortcode('tabbed_section', 'nectar_tabs');
+
 
 function nectar_tab( $atts, $content ){
 	extract(shortcode_atts(array( 'title' => '%d', 'id' => '%d'), $atts));
@@ -908,9 +893,8 @@ function nectar_tab( $atts, $content ){
 	
 	$GLOBALS['tab_count']++;
 }
-if (!class_exists('WPBakeryVisualComposerAbstract') || class_exists('WPBakeryVisualComposerAbstract') && !defined('SALIENT_VC_ACTIVE')) {
-	add_shortcode( 'tab', 'nectar_tab' );
-}
+add_shortcode( 'tab', 'nectar_tab' );
+
 
 //toggle panel - accordion chosen
 function nectar_toggles($atts, $content = null) { 
@@ -939,10 +923,8 @@ add_shortcode('toggle', 'nectar_toggle');
 #-----------------------------------------------------------------# 
 function nectar_slider_processing($atts, $content = null) {
 	
-	extract(shortcode_atts(array("arrow_navigation" => 'false', "autorotate"=> '', "button_sizing"=> 'regular', "slider_button_styling"=> 'btn_with_count', "overall_style" => 'classic', "slider_transition"=> 'swipe', "flexible_slider_height"=> '', "min_slider_height"=> '', "loop" => 'false', 'fullscreen' => 'false', "bullet_navigation" => 'false', "parallax" => 'false', "full_width" => '', "slider_height" => '650', "desktop_swipe" => 'false', "location" => ''), $atts));   
+	extract(shortcode_atts(array("arrow_navigation" => 'false', "autorotate"=> '', "button_sizing"=> 'regular', "slider_transition"=> 'swipe', "flexible_slider_height"=> '', "min_slider_height"=> '', "loop" => 'false', 'fullscreen' => 'false', "bullet_navigation" => 'false', "parallax" => 'false', "full_width" => '', "slider_height" => '650', "desktop_swipe" => 'false', "location" => ''), $atts));   
     
-    if($overall_style == 'directional') $desktop_swipe = 'false';
-
 	$slider_config = array(
 	  'slider_height' => $slider_height,
 	  'full_width' => $full_width,
@@ -954,8 +936,6 @@ function nectar_slider_processing($atts, $content = null) {
 	  'desktop_swipe' => $desktop_swipe,
 	  'parallax' => $parallax,
 	  'slider_transition' => $slider_transition,
-	  'overall_style' => $overall_style,
-	  'slider_button_styling' => $slider_button_styling,
 	  'loop' => $loop,
 	  'fullscreen' => $fullscreen,
 	  'button_sizing' => $button_sizing,
@@ -1080,7 +1060,7 @@ function nectar_portfolio_processing($atts, $content = null) {
 		$filters_width = (!empty($options['header-fullwidth']) && $options['header-fullwidth'] == '1' && $cols == 'elastic') ? 'full-width-content ': 'full-width-section ';
 
 	 	?>
-		<div class="<?php echo $filters_id . ' '; echo $filters_width; if($span_num != 'elastic-portfolio-item') echo 'non-fw'; ?>">
+		<div id="<?php echo $filters_id;?>" class="<?php echo $filters_width; if($span_num != 'elastic-portfolio-item') echo 'non-fw'; ?>">
 			<div class="container">
 				<span id="current-category"><?php echo __('All', NECTAR_THEME_NAME); ?></span>
 				<ul>
@@ -1092,7 +1072,7 @@ function nectar_portfolio_processing($atts, $content = null) {
 			</div>
 		</div>
 	<?php } else if($enable_sortable == 'true' && $horizontal_filters != 'true') { ?>
-		<div class="<?php echo $filters_id;?>">
+		<div id="<?php echo $filters_id;?>">
 			<a href="#" data-sortable-label="<?php echo (!empty($options['portfolio-sortable-text'])) ? $options['portfolio-sortable-text'] :'Sort Portfolio'; ?>" id="sort-portfolio"><span><?php echo (!empty($options['portfolio-sortable-text'])) ? $options['portfolio-sortable-text'] : __('Sort Portfolio',NECTAR_THEME_NAME); ?></span> <i class="icon-angle-down"></i></a> 
 			<ul>
 			   <li><a href="#" data-filter="*"><?php echo __('All', NECTAR_THEME_NAME); ?></a></li>
@@ -1120,7 +1100,7 @@ function nectar_portfolio_processing($atts, $content = null) {
 			}
 			?>
 			
-			<div class="row portfolio-items <?php if($masonry_layout == 'true') echo 'masonry-items'; else { echo 'no-masonry'; } ?> <?php echo $infinite_scroll_class; ?> <?php echo $constrain_col_class; ?>" data-starting-filter="<?php echo $starting_category; ?>" data-categories-to-show="<?php echo $category; ?>" data-col-num="<?php echo $cols; ?>">
+			<div id="portfolio" class="row portfolio-items <?php if($masonry_layout == 'true') echo 'masonry-items'; else { echo 'no-masonry'; } ?> <?php echo $infinite_scroll_class; ?> <?php echo $constrain_col_class; ?>" data-starting-filter="<?php echo $starting_category; ?>" data-categories-to-show="<?php echo $category; ?>" data-col-num="<?php echo $cols; ?>">
 				<?php 
 				
 
@@ -1166,8 +1146,6 @@ function nectar_portfolio_processing($atts, $content = null) {
 					  $the_project_link = (!empty($custom_project_link)) ? $custom_project_link : get_permalink();
 					  
 					  $project_excerpt = get_post_meta($post->ID, '_nectar_project_excerpt', true);
-					  $project_image_caption = get_post(get_post_thumbnail_id())->post_content;
-					  $project_image_caption = strip_tags($project_image_caption);
 					  
 					  $project_accent_color = get_post_meta($post->ID, '_nectar_project_accent_color', true);
 					?>
@@ -1248,10 +1226,7 @@ function nectar_portfolio_processing($atts, $content = null) {
 										
 										//image
 									    else {
-
-									       echo '<a href="'. $featured_image[0].'"'; 
-									       if(!empty($project_image_caption)) echo 'title="'.$project_image_caption.'"';
-									       echo 'class="pretty_photo">'.__("View Larger", NECTAR_THEME_NAME).'</a> ';
+									       echo '<a href="'. $featured_image[0].'" class="pretty_photo">'.__("View Larger", NECTAR_THEME_NAME).'</a> ';
 									    }
 										
 										if($lightbox_only != 'true') {
@@ -1351,7 +1326,7 @@ function nectar_portfolio_processing($atts, $content = null) {
 				
 								        } else { ?>
 								        	
-								        	<a href="<?php echo $featured_image[0]; ?>" <?php if(!empty($project_image_caption)) echo ' title="'.$project_image_caption.'" '; ?> class="pretty_photo"></a>
+								        	<a href="<?php echo $featured_image[0]; ?>" class="pretty_photo"></a>
 								        	
 								        <?php  } ?>
 
@@ -1445,7 +1420,7 @@ function nectar_portfolio_processing($atts, $content = null) {
 				
 								        } else { ?>
 								        	
-								        	<a href="<?php echo $featured_image[0]; ?>"  <?php if(!empty($project_image_caption)) echo ' title="'.$project_image_caption.'" '; ?> class="pretty_photo"></a>
+								        	<a href="<?php echo $featured_image[0]; ?>" class="pretty_photo"></a>
 								        	
 								        <?php  } ?>
 
@@ -1537,7 +1512,7 @@ function nectar_portfolio_processing($atts, $content = null) {
 				
 								        } else { ?>
 								        	
-								        	<a href="<?php echo $featured_image[0]; ?>" <?php if(!empty($project_image_caption)) echo ' title="'.$project_image_caption.'" '; ?> class="pretty_photo"></a>
+								        	<a href="<?php echo $featured_image[0]; ?>" class="pretty_photo"></a>
 								        	
 								        <?php  } ?>
 
@@ -1658,16 +1633,10 @@ function nectar_blog_processing($atts, $content = null) {
 			$infinite_scroll_class = ' infinite_scroll';
 		}
 		
-		if($masonry_class != null) {
-			$masonry_style = (!empty($options['blog_masonry_type'])) ? $options['blog_masonry_type']: 'classic';
-		}
-		else {
-			$masonry_style = null;
-		}
 		if($layout == 'std-blog-sidebar' || $layout == 'masonry-blog-sidebar'){
-			echo '<div id="post-area" class="col span_9 '.$masonry_class.' '.$masonry_style.' '.$infinite_scroll_class.'"> <div class="posts-container">';
+			echo '<div id="post-area" class="col span_9 '.$masonry_class.$infinite_scroll_class.'"> <div class="posts-container">';
 		} else {
-			echo '<div id="post-area" class="col span_12 col_last '.$masonry_class.' '.$masonry_style.' '.$infinite_scroll_class.'"> <div class="posts-container">';
+			echo '<div id="post-area" class="col span_12 col_last '.$masonry_class.$infinite_scroll_class.'"> <div class="posts-container">';
 		}
 			
 			if ( get_query_var('paged') ) {

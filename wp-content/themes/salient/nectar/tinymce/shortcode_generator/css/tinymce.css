@@ -353,6 +353,9 @@ select[multiple="multiple"] {
 	margin-top: -2px;
 }
 
+.composer-switch {
+	height: 22px!Important;
+}
 
 .button.nectar-shortcode-generator, .ui-buttonset .ui-state-active {
 	background-color: #1990DC !important;

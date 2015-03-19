@@ -244,13 +244,14 @@ foreach ( $images as $attach_id ) {
 								<div class="work-info-bg"></div>
 								<div class="work-info"> 
 									
-									<?php 
+									<div class="vert-center">
+										<?php 
 										$attachment_meta = wp_get_attachment($attach_id);
 
 										if(!empty($attachment_meta['image_url'])) {
-											echo '<div class="vert-center no-text"><a class="no-text" href="'.$attachment_meta['image_url'].'">'.__("View Larger", NECTAR_THEME_NAME).'</a> ';
+											echo '<a class="no-text" href="'.$attachment_meta['image_url'].'">'.__("View Larger", NECTAR_THEME_NAME).'</a> ';
 										} else {
-											echo '<div class="vert-center"><a href="'.$p_img_large[0].'"'.$pretty_rel_random.' >'.__("View Larger", NECTAR_THEME_NAME).'</a> ';
+											echo '<a href="'.$p_img_large[0].'"'.$pretty_rel_random.' >'.__("View Larger", NECTAR_THEME_NAME).'</a> ';
 										}
 										
 										 ?>
