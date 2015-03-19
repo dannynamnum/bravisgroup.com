@@ -139,7 +139,7 @@
 	$row_id = (!empty($id)) ? $id: uniqid("fws_");
 	 
     echo'
-	<div id="'.$row_id.'" data-bg-mobile-hidden="'.$background_image_mobile_hidden.'" class="wpb_row vc_row-fluid '. $main_class . $parallax_class . ' ' . $vertically_center_class . ' '. $class . ' " '.$using_custom_text_color.' style="'.$style.'">';
+	<div id="'.$row_id.'" data-bg-mobile-hidden="'.$background_image_mobile_hidden.'" class="wpb_row vc_row-fluid vc_row '. $main_class . $parallax_class . ' ' . $vertically_center_class . ' '. $class . ' " '.$using_custom_text_color.' style="'.$style.'">';
 	
 	//row bg 
 	echo '<div class="row-bg-wrap"> <div class="row-bg '.$using_image_class . ' ' . $using_bg_color_class . ' '. $etxra_class.'" style="'.$bg_props.'"></div> </div>';

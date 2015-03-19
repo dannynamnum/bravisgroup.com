@@ -13,10 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $post, $product, $woocommerce, $options;
 
+wp_enqueue_script('iosSlider');
+
 if(!empty($options['single_product_gallery_type']) && $options['single_product_gallery_type'] == 'ios_slider') {
 
-	$product_attach_ids = $product->get_gallery_attachment_ids();
-	wp_enqueue_script('iosSlider'); ?>
+	$product_attach_ids = $product->get_gallery_attachment_ids(); ?>
 
 
     <div class="images">

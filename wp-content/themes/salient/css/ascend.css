@@ -99,7 +99,7 @@ html .ascend .carousel-heading .container .carousel-prev {
 
 .ascend #header-outer .cart-menu .cart-icon-wrap .icon-salient-cart { 
 	font-size: 22px!important; 
-	left: 5px;
+	left: 0px;
 	transition: all 0.2s ease!important;
 	-o-transition: all 0.2s ease!important;
 	-webkit-transition: all 0.2s ease!important;
@@ -109,16 +109,16 @@ html .ascend .carousel-heading .container .carousel-prev {
 	content: "\e606";
 }
 
-.ascend #header-outer a.cart-contents span:before {
+.ascend #header-outer a.cart-contents .cart-wrap span:before {
 	display: none!important;
 }
 
 .ascend #header-outer .cart-menu .cart-icon-wrap {
-	width: 57px!important;
+	width: 53px!important;
 }
 
 .ascend #header-outer .cart-menu {
-	padding-left: 24px;
+	padding-left: 29px;
 }
 
 .ascend #header-outer .cart-wrap {
@@ -137,6 +137,10 @@ html .ascend .carousel-heading .container .carousel-prev {
 .ascend #header-outer[data-full-width="true"] header#top nav ul #search-btn {
 	margin-left: 1px!important;
 	visibility: hidden;
+}
+
+.ascend #header-outer[data-full-width="true"][data-remove-border="true"] header#top nav ul #search-btn {
+	margin-left: 22px!important;
 }
 
 .ascend #header-outer[data-full-width="true"][data-cart="true"] header#top nav ul .slide-out-widget-area-toggle {
@@ -204,7 +208,7 @@ html .ascend .carousel-heading .container .carousel-prev {
 	border: none!important;
 }
 
-.ascend #header-outer a.cart-contents span {
+.ascend #header-outer a.cart-contents .cart-wrap span {
     border-radius: 99px!important;
     font: bold 11px/16px Arial;
     line-height: 18px!important;
@@ -218,7 +222,7 @@ html .ascend .carousel-heading .container .carousel-prev {
 }
 
 
-.ascend #header-outer .first-load a.cart-contents span {
+.ascend #header-outer .first-load a.cart-contents .cart-wrap span {
 	visibility: visible;
 	animation: 0.6s ease-in-out 0.12s normal both 1 bounce_in_animation;
     -webkit-animation: 0.6s ease-in-out 0.12s normal both 1 bounce_in_animation;
@@ -590,10 +594,15 @@ html .ascend .comment-list .reply a:hover {
 }
 
 .container-wrap .span_12.light input[type="text"], .container-wrap .span_12.light textarea, .container-wrap .span_12.light input[type="email"], .container-wrap .span_12.light input[type="password"], .container-wrap .span_12.light input[type="tel"], .container-wrap .span_12.light input[type="url"], .container-wrap .span_12.light input[type="search"], .container-wrap .span_12.light input[type="date"] {
-	border: 1px solid rgba(255,255,255,0.4)!important;
+	border: 1px solid rgba(255,255,255,0.6)!important;
 	color: #fff;
 }
 
 .container-wrap .span_12.light input[type="text"]:focus, .container-wrap .span_12.light textarea:focus, .container-wrap .span_12.light input[type="email"]:focus, .container-wrap .span_12.light input[type="password"]:focus, .container-wrap .span_12.light input[type="tel"]:focus, .container-wrap .span_12.light input[type="url"]:focus, .container-wrap .span_12.light input[type="search"]:focus, .container-wrap .span_12.light input[type="date"]:focus {
-	border: 1px solid rgba(255,255,255,0.55)!important;
+	border: 1px solid rgba(255,255,255,0.8)!important;
+}
+
+.container-wrap .span_12.light input[type="submit"]:hover {
+	background-color: #333333!important;
+	opacity: 0.8!important;
 }

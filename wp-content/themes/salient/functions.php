@@ -37,17 +37,17 @@ function nectar_register_js() {
 		wp_register_script('orbit', get_template_directory_uri() . '/js/orbit.js', 'jquery', '1.4', TRUE);
 		wp_register_script('nicescroll', get_template_directory_uri() . '/js/nicescroll.js', 'jquery', '3.5.4' ,TRUE);
 		wp_register_script('sticky', get_template_directory_uri() . '/js/sticky.js', 'jquery', '1.0', TRUE);
-		wp_register_script('nectar_prettyPhoto', get_template_directory_uri() . '/js/prettyPhoto.js', 'jquery', '4.8.1', TRUE);
+		wp_register_script('nectar_prettyPhoto', get_template_directory_uri() . '/js/prettyPhoto.js', 'jquery', '5.5.4', TRUE);
 		wp_register_script('nectar_parallax', get_template_directory_uri() . '/js/parallax.js', 'jquery', '1.0', TRUE);
 		wp_register_script('isotope', get_template_directory_uri() . '/js/isotope.min.js', 'jquery', '2.0' ,TRUE);
-		wp_register_script('nectarSlider', get_template_directory_uri() . '/js/nectar-slider.js', 'jquery', '4.8.1', TRUE);
-		wp_register_script('iosSlider', get_template_directory_uri() . '/js/jquery.iosslider.min.js', 'jquery', '4.8.1', TRUE);
-		wp_register_script('ajaxify', get_template_directory_uri() . '/js/ajaxify.js', 'jquery', '4.8.1', TRUE);
+		wp_register_script('nectarSlider', get_template_directory_uri() . '/js/nectar-slider.js', 'jquery', '5.5.4', TRUE);
+		wp_register_script('iosSlider', get_template_directory_uri() . '/js/jquery.iosslider.min.js', 'jquery', '5.5.4', TRUE);
+		wp_register_script('ajaxify', get_template_directory_uri() . '/js/ajaxify.js', 'jquery', '5.5.4', TRUE);
 
 		if ( floatval(get_bloginfo('version')) < "3.6" ) {
 			wp_register_script('jplayer', get_template_directory_uri() . '/js/jplayer.min.js', 'jquery', '2.1', TRUE);
 		}
-		wp_register_script('nectarFrontend', get_template_directory_uri() . '/js/init.js', array('jquery', 'superfish'), '4.8.1', TRUE);
+		wp_register_script('nectarFrontend', get_template_directory_uri() . '/js/init.js', array('jquery', 'superfish'), '5.5.4', TRUE);
 		
 		// Dequeue
 		wp_dequeue_script( 'prettyPhoto' );
@@ -88,7 +88,6 @@ function nectar_page_specific_js() {
 	
 	global $post;
 	global $options;
-	global $nectar_disable_vc;
 	
 	if(!is_object($post)) $post = (object) array('post_content'=>' ', 'ID' => ' ');
     $template_name = get_post_meta( $post->ID, '_wp_page_template', true );
@@ -119,9 +118,9 @@ function nectar_page_specific_js() {
 			wp_enqueue_style('wp-mediaelement');
 		} 
 		
-		if (class_exists('WPBakeryVisualComposerAbstract') && $nectar_disable_vc != '1') {
-			wp_register_script('progressCircle', WPBakeryVisualComposer::getInstance()->assetURL('lib/progress-circle/ProgressCircle.js'));
-       		wp_register_script('vc_pie', WPBakeryVisualComposer::getInstance()->assetURL('js/jquery.vc_chart.js'), array('jquery', 'progressCircle'));
+		if (class_exists('WPBakeryVisualComposerAbstract') && defined( 'SALIENT_VC_ACTIVE')) {
+			wp_register_script('progressCircle', vc_asset_url('lib/progress-circle/ProgressCircle.js'));
+       		wp_register_script('vc_pie', vc_asset_url('lib/vc_chart/jquery.vc_chart.js'), array('jquery', 'progressCircle'));
 			wp_enqueue_script('vc_pie');
 		}
 			
@@ -132,19 +131,6 @@ function nectar_page_specific_js() {
 	if(stripos( $post->post_content, '[nectar_slider') !== FALSE || stripos( $portfolio_extra_content, '[nectar_slider') !== FALSE
 	|| stripos($post->post_content, '[vc_gallery type="nectarslider_style"') !== FALSE || stripos( $portfolio_extra_content, '[vc_gallery type="nectarslider_style"') !== FALSE) {
 		
-		if ( floatval(get_bloginfo('version')) >= "3.6" ) {
-			//wp_enqueue_script('wp-mediaelement');
-			//wp_enqueue_style('wp-mediaelement');
-		} else {
-			
-			//register media element for WordPress 3.5
-			//wp_register_script('wp-mediaelement', get_template_directory_uri() . '/js/mediaelement-and-player.min.js', array('jquery'), '1.0', TRUE);
-			//wp_register_style('wp-mediaelement', get_template_directory_uri() . '/css/mediaelementplayer.min.css');
-			
-			//wp_enqueue_script('wp-mediaelement');
-			//wp_enqueue_style('wp-mediaelement');
-		}
-		
 
 		wp_enqueue_script('nectarSlider');	
 		
@@ -154,13 +140,9 @@ function nectar_page_specific_js() {
 	if ( is_singular() && comments_open() && get_option('thread_comments') )
 	wp_enqueue_script('comment-reply');
 	
-	
-	
 }
 
 add_action('wp_enqueue_scripts', 'nectar_page_specific_js'); 
-
-
 
 
 
@@ -188,14 +170,14 @@ if($woocommerce) {
 function nectar_main_styles() {	
 		 
 		 // Register 
-		 wp_register_style('rgs', get_template_directory_uri() . '/css/rgs.css', '', '4.8.1');
+		 wp_register_style('rgs', get_template_directory_uri() . '/css/rgs.css', '', '5.5.4');
 		 wp_register_style('orbit', get_template_directory_uri() . '/css/orbit.css');
 		 wp_register_style('woocommerce', get_template_directory_uri() . '/css/woocommerce.css');
 		 wp_register_style('font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css');
-		 wp_register_style("main-styles", get_stylesheet_directory_uri() . "/style.css", '', '4.8.1');
-		 wp_register_style("responsive", get_template_directory_uri() . "/css/responsive.css", '', '4.8.1');
+		 wp_register_style("main-styles", get_stylesheet_directory_uri() . "/style.css", '', '5.5.4');
+		 wp_register_style("responsive", get_template_directory_uri() . "/css/responsive.css", '', '5.5.4');
 		 wp_register_style("non-responsive", get_template_directory_uri() . "/css/non-responsive.css");
-		 wp_register_style("skin-ascend", get_template_directory_uri() . "/css/ascend.css", '', '4.8.1');
+		 wp_register_style("skin-ascend", get_template_directory_uri() . "/css/ascend.css", '', '5.5.4');
 		 wp_register_style("nectar-ie8", get_template_directory_uri() . "/css/ie8.css");
 		 wp_register_style('nectar-rtl', get_template_directory_uri() . '/css/rtl.css');
 		 
@@ -387,7 +369,7 @@ if (!function_exists('nectar_page_specific_dynamic')) {
 					 }
 
 					#header-outer.transparent header#top nav > ul > li > a, 
-					 #header-outer.transparent header#top nav ul #search-btn a span, 
+					 #header-outer.transparent header#top nav ul #search-btn a span.icon-salient-search, 
 					 #header-outer.transparent nav > ul > li > a > .sf-sub-indicator [class^="icon-"], 
 					 #header-outer.transparent nav > ul > li > a > .sf-sub-indicator [class*=" icon-"],
 					 #header-outer.transparent .cart-menu .cart-icon-wrap .icon-salient-cart,
@@ -458,7 +440,7 @@ if (!function_exists('nectar_page_specific_dynamic')) {
 		 @media only screen and (min-width: 1000px) {
 			 .woocommerce #reviews #comments, .woocommerce #reviews #review_form_wrapper {  float: left; width: 47%; }
 			 .woocommerce #reviews #comments { margin-right: 3%; width: 50%; } 
-			 .ascend #respond { margin-top: 0px!important; }
+			 .ascend.woocommerce #respond { margin-top: 0px!important; }
 			 .woocommerce .woocommerce-tabs > div { margin-top: 15px!important; }
 			 .woocommerce #reviews #reply-title { margin-top: 5px!important; }
 		 }';
@@ -623,7 +605,8 @@ if (!function_exists('nectar_add_image_sizes')) {
 		add_image_size( 'wide', 1000, 500, true );  
 		add_image_size( 'regular', 500, 500, true ); 
 		add_image_size( 'tall', 500, 1000, true ); 
-		add_image_size( 'wide_tall', 1000, 1000, true ); 
+		add_image_size( 'wide_tall', 1000, 1000, true );
+		add_image_size( 'large_featured', 1700, 700, true );  
 
 	}
 }
@@ -665,25 +648,32 @@ if ( function_exists( 'register_nav_menus' ) ) {
 
 
 //dropdown arrows
-class Nectar_Arrow_Walker_Nav_Menu extends Walker_Nav_Menu {
-    function display_element($element, &$children_elements, $max_depth, $depth=0, $args, &$output) {
-        $id_field = $this->db_fields['id'];
-        global $options;
-        $theme_skin = (!empty($options['theme-skin']) && $options['theme-skin'] == 'ascend') ? 'ascend' : 'default';
+if ( !function_exists( 'nectar_walker_nav_menu' ) ) {
+	function nectar_walker_nav_menu() {
 
-        if (!empty($children_elements[$element->$id_field]) && $element->menu_item_parent == 0 && $theme_skin !='ascend') { 
-            $element->title =  $element->title . '<span class="sf-sub-indicator"><i class="icon-angle-down"></i></span>'; 
-			$element->classes[] = 'sf-with-ul';
-        }
-		
-		if (!empty($children_elements[$element->$id_field]) && $element->menu_item_parent != 0) { 
-            $element->title =  $element->title . '<span class="sf-sub-indicator"><i class="icon-angle-right"></i></span>'; 
-        }
-	    
-        Walker_Nav_Menu::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
-    }
+		class Nectar_Arrow_Walker_Nav_Menu extends Walker_Nav_Menu {
+		    function display_element($element, &$children_elements, $max_depth, $depth=0, $args, &$output) {
+		        $id_field = $this->db_fields['id'];
+		        global $options;
+		        $theme_skin = (!empty($options['theme-skin']) && $options['theme-skin'] == 'ascend') ? 'ascend' : 'default';
+
+		        if (!empty($children_elements[$element->$id_field]) && $element->menu_item_parent == 0 && $theme_skin !='ascend') { 
+		            $element->title =  $element->title . '<span class="sf-sub-indicator"><i class="icon-angle-down"></i></span>'; 
+					$element->classes[] = 'sf-with-ul';
+		        }
+				
+				if (!empty($children_elements[$element->$id_field]) && $element->menu_item_parent != 0) { 
+		            $element->title =  $element->title . '<span class="sf-sub-indicator"><i class="icon-angle-right"></i></span>'; 
+		        }
+			    
+		        Walker_Nav_Menu::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
+		    }
+		}
+
+	}
 }
 
+nectar_walker_nav_menu();
 
 #-----------------------------------------------------------------#
 # TGM
@@ -696,48 +686,18 @@ require_once('nectar/tgm-plugin-activation/required_plugins.php');
 # Nectar VC
 #-----------------------------------------------------------------#
 
-$nectar_disable_vc = (isset($options['disable-vc'])) ? $options['disable-vc'] : '0';
-
-if( $nectar_disable_vc != '1'){
-
-	//load VC if not already active
-	if (!class_exists('WPBakeryVisualComposerAbstract')) {
-
-	  $nectar_vc_post_types = (!empty($options['product_tab_position']) && $options['product_tab_position'] == 'fullwidth') ? array('page','post','portfolio','product') : array('page','post','portfolio');
-
-	  $dir = dirname(__FILE__) . '/wpbakery';
-	  $composer_settings = Array(
-	      'APP_ROOT'      => $dir . '/js_composer',
-	      'WP_ROOT'       => dirname( dirname( dirname( dirname($dir ) ) ) ). '/',
-	      'APP_DIR'       => basename( $dir ) . '/js_composer/',
-	      'CONFIG'        => $dir . '/js_composer/config/',
-	      'ASSETS_DIR'    => 'assets/',
-	      'COMPOSER'      => $dir . '/js_composer/composer/',
-	      'COMPOSER_LIB'  => $dir . '/js_composer/composer/lib/',
-	      'SHORTCODES_LIB'  => $dir . '/js_composer/composer/lib/shortcodes/',
-	      'USER_DIR_NAME'  => 'nectar/nectar-vc-addons/vc_templates', 
-	      'default_post_types' => $nectar_vc_post_types
-	  );
-
-	  require_once locate_template('/wpbakery/js_composer/js_composer.php');
-	  $wpVC_setup->init($composer_settings);
-	  
+//Add Nectar Functionality to VC/*
+if (class_exists('WPBakeryVisualComposerAbstract') && defined( 'SALIENT_VC_ACTIVE')) {
+	function add_nectar_to_vc(){
+		require_once locate_template('/nectar/nectar-vc-addons/nectar-addons.php');
 	}
 
-	//Add Nectar Functionality to VC
-	if (class_exists('WPBakeryVisualComposerAbstract')) {
-		function add_nectar_to_vc(){
-			require_once locate_template('/nectar/nectar-vc-addons/nectar-addons.php');
-		}
-
-		add_action('init','add_nectar_to_vc', 5);
-		add_action('admin_enqueue_scripts', 'nectar_vc_styles');
-		
-		function nectar_vc_styles() {
-			wp_enqueue_style('nectar_vc', get_template_directory_uri() .'/nectar/nectar-vc-addons/nectar-addons.css', array(), time(), 'all');
-		}
+	add_action('init','add_nectar_to_vc', 5);
+	add_action('admin_enqueue_scripts', 'nectar_vc_styles');
+	
+	function nectar_vc_styles() {
+		wp_enqueue_style('nectar_vc', get_template_directory_uri() .'/nectar/nectar-vc-addons/nectar-addons.css', array(), time(), 'all');
 	}
-
 }
 
 
@@ -990,8 +950,9 @@ if(!function_exists('change_wp_search_size')){
 		return $query; 
 	}
 }
-add_filter('pre_get_posts', 'change_wp_search_size');
-
+if(!is_admin()) {
+	add_filter('pre_get_posts', 'change_wp_search_size');
+}
 
 
 
@@ -1767,7 +1728,7 @@ if (!function_exists('nectar_slider_display')) {
 		 	 $first_section = ''; 
 		 }
 			  
-			$slider .= '<div style="height: '.$config_arr['slider_height'].'px" data-transition="'.$config_arr['slider_transition'].'" data-flexible-height="'.$config_arr['flexible_slider_height'].'" data-fullscreen="'.$config_arr['fullscreen'].'" data-button-sizing="'.$config_arr['button_sizing'].'" data-autorotate="'.$config_arr['autorotate'].'" data-parallax="'.$config_arr['parallax'].'" data-full-width="'.$fullwidth.'" class="nectar-slider-wrap '.$first_section.'" id="ns-id-'.uniqid().'">
+			$slider .= '<div style="height: '.$config_arr['slider_height'].'px" data-transition="'.$config_arr['slider_transition'].'" data-overall_style="'.$config_arr['overall_style'].'" data-flexible-height="'.$config_arr['flexible_slider_height'].'" data-fullscreen="'.$config_arr['fullscreen'].'" data-button-sizing="'.$config_arr['button_sizing'].'" data-button-styling="'.$config_arr['slider_button_styling'].'" data-autorotate="'.$config_arr['autorotate'].'" data-parallax="'.$config_arr['parallax'].'" data-full-width="'.$fullwidth.'" class="nectar-slider-wrap '.$first_section.'" id="ns-id-'.uniqid().'">
 			<div style="height: '.$config_arr['slider_height'].'px" class="swiper-container" data-loop="'.$config_arr['loop'].'" data-height="'. $config_arr["slider_height"] .'" data-min-height="'.$config_arr['min_slider_height'].'" data-arrows="' . $config_arr["arrow_navigation"].'" data-bullets="'.$config_arr["bullet_navigation"].'" data-desktop-swipe="'. $config_arr["desktop_swipe"].'" data-settings="">
 				    <div class="swiper-wrapper">';
 				     
@@ -1937,11 +1898,17 @@ if (!function_exists('nectar_slider_display')) {
 				    
 				   $slider .= '</div>';
 	
-				      if($config_arr['arrow_navigation'] == 'true' && $slide_count > 1) {
+				     if($config_arr['arrow_navigation'] == 'true' && $slide_count > 1 && $config_arr['slider_button_styling'] != 'btn_with_preview' && $config_arr['overall_style'] != 'directional') {
+
 					     $slider .= '<a href="" class="slider-prev"><i class="icon-salient-left-arrow"></i> <div class="slide-count"> <span class="slide-current">1</span> <i class="icon-salient-right-line"></i> <span class="slide-total"></span> </div> </a>
 				     		<a href="" class="slider-next"><i class="icon-salient-right-arrow"></i> <div class="slide-count"> <span class="slide-current">1</span> <i class="icon-salient-right-line"></i> <span class="slide-total"></span> </div> </a>';
-				       } 
-					 
+				      } 
+
+					 else if($config_arr['arrow_navigation'] == 'true' && $slide_count > 1 && $config_arr['slider_button_styling'] == 'btn_with_preview' || $config_arr['overall_style'] == 'directional') {
+					     $slider .= '<a href="" class="slider-prev"><i class="icon-angle-left"></i> </a>
+				     		<a href="" class="slider-next"><i class="icon-angle-right"></i> </a>';
+				      } 
+
 					 if($config_arr['bullet_navigation'] == 'true' && $slide_count > 1){ 
 				     	$slider .= '<div class="slider-pagination"></div>';
 				     }
@@ -2774,9 +2741,9 @@ function be_get_adjacent_post( $in_same_cat = false, $excluded_categories = '', 
 	$op = $previous ? '<' : '>';
 	$order = $previous ? 'DESC' : 'ASC';
 
-	$join  = apply_filters( "get_{$adjacent}_post_join", $join, $in_same_cat, $excluded_categories );
+	$join = apply_filters( "get_{$adjacent}_post_join", $join, $in_same_cat, $excluded_categories );
 	$where = apply_filters( "get_{$adjacent}_post_where", $wpdb->prepare("WHERE p.post_date $op %s AND p.post_type = %s AND p.post_status = 'publish' $posts_in_ex_cats_sql", $current_post_date, $post->post_type), $in_same_cat, $excluded_categories );
-	$sort  = apply_filters( "get_{$adjacent}_post_sort", "ORDER BY p.post_date $order LIMIT 1" );
+	$sort = apply_filters( "get_{$adjacent}_post_sort", "ORDER BY p.post_date $order LIMIT 1" );
 
 	$query = "SELECT p.* FROM $wpdb->posts AS p $join $where $sort";
 	$query_key = 'adjacent_post_' . md5($query);
@@ -2951,8 +2918,50 @@ if ( !function_exists( 'nectar_page_header' ) ) {
 									<li id="all-items"><a href="<?php echo $portfolio_link; ?>"><i class="icon-salient-back-to-all"></i></a></li>  
 								</ul>
 								<ul class="controls">                                       
-									<li id="prev-link"><?php next_post_link('%link','<i class="icon-salient-left-arrow-thin"></i>'); ?></li>
-									<li id="next-link"><?php previous_post_link('%link','<i class="icon-salient-right-arrow-thin"></i>'); ?></li> 
+									<?php 
+									if(!empty($options['portfolio_same_category_single_nav']) && $options['portfolio_same_category_single_nav'] == '1') {
+
+											// get_posts in same custom taxonomy
+											$terms = get_the_terms($post->id,"project-type");
+											$project_cat = null;
+											
+										    if(empty($terms)) $terms = array('1' => (object) array('name' => 'nothing'));
+											
+									     	foreach ( $terms as $term ) {
+									      	 	$project_cat = strtolower($term->name);
+									     	}
+
+											$postlist_args = array(
+											   'posts_per_page'  => -1,
+											   'orderby'         => 'menu_order title',
+											   'order'           => 'ASC',
+											   'post_type'       => 'portfolio',
+											   'project-type' => $project_cat
+											); 
+											$postlist = get_posts( $postlist_args );
+
+											// get ids of posts retrieved from get_posts
+											$ids = array();
+											foreach ($postlist as $thepost) {
+											   $ids[] = $thepost->ID;
+											}
+											// get and echo previous and next post in the same taxonomy        
+											$thisindex = array_search($post->ID, $ids);
+						
+											$previd = (isset($ids[$thisindex-1])) ? $ids[$thisindex-1] : null;
+											$nextid = (isset($ids[$thisindex+1])) ? $ids[$thisindex+1] : null;
+											if ( !empty($previd) ) {
+											   echo '<li id="prev-link"><a rel="prev" href="' . get_permalink($previd). '"><i class="icon-salient-left-arrow-thin"></i></a></li>';
+											}
+											if ( !empty($nextid) ) {
+											   echo '<li id="next-link"><a rel="next" href="' . get_permalink($nextid). '"><i class="icon-salient-right-arrow-thin"></i></a></li>';
+											} ?>
+
+
+										<?php } else { ?>
+											<li id="prev-link"><?php next_post_link('%link','<i class="icon-salient-left-arrow-thin"></i>'); ?></li>
+											<li id="next-link"><?php previous_post_link('%link','<i class="icon-salient-right-arrow-thin"></i>'); ?></li> 
+										<?php } ?>
 								</ul>
 							</div>
 					 <?php } ?>
@@ -3073,7 +3082,7 @@ if ( !function_exists( 'nectar_page_header' ) ) {
 						 
 						<?php // portfolio filters
 							if( $page_template == 'template-portfolio.php' && $display_sortable == '1' && $inline_filters == '0') { ?>
-							<div id="<?php echo $filters_id;?>">
+							<div class="<?php echo $filters_id;?>" instance="0">
 									<a href="#" data-sortable-label="<?php echo (!empty($options['portfolio-sortable-text'])) ? $options['portfolio-sortable-text'] :'Sort Portfolio'; ?>" id="sort-portfolio"><span><?php echo (!empty($options['portfolio-sortable-text'])) ? $options['portfolio-sortable-text'] : __('Sort Portfolio',NECTAR_THEME_NAME); ?></span> <i class="icon-angle-down"></i></a> 
 								<ul>
 								   <li><a href="#" data-filter="*"><?php echo __('All', NECTAR_THEME_NAME); ?></a></li>
@@ -3112,7 +3121,7 @@ if ( !function_exists( 'nectar_page_header' ) ) {
 						
 						<?php // portfolio filters
 						if( $page_template == 'template-portfolio.php' && $display_sortable == '1' && $inline_filters == '0') { ?>
-						<div id="<?php echo $filters_id;?>">
+						<div class="<?php echo $filters_id;?>" instance="0">
 							
 							<a href="#" data-sortable-label="<?php echo (!empty($options['portfolio-sortable-text'])) ? $options['portfolio-sortable-text'] :'Sort Portfolio'; ?>" id="sort-portfolio"><span><?php echo (!empty($options['portfolio-sortable-text'])) ? $options['portfolio-sortable-text'] : __('Sort Portfolio',NECTAR_THEME_NAME); ?></span> <i class="icon-angle-down"></i></a> 
 							
@@ -3612,7 +3621,7 @@ if (!function_exists('add_opengraph')) {
 
 $using_jetpack_publicize = ( class_exists( 'Jetpack' ) && in_array( 'publicize', Jetpack::get_active_modules()) ) ? true : false;
 
-if ( !defined('WPSEO_VERSION') && !class_exists('NY_OG_Admin') && $using_jetpack_publicize == false) {
+if ( !defined('WPSEO_VERSION') && !class_exists('NY_OG_Admin') && !class_exists('Wpsso') && $using_jetpack_publicize == false) {
 	add_action( 'wp_head', 'add_opengraph', 5 );
 }
 

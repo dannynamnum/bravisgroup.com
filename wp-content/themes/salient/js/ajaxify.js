@@ -772,6 +772,7 @@ var linkr = 'link[href*="!"]', scrr = 'script[src*="!"]';
             $('#header-outer').html(fn('body').find('#header-outer').html());   //Update header nav 
 
             $('#header-outer .cart-outer').replaceWith($wooCart);
+            $('#header-outer').removeClass('directional-nav-effect');
             if($wooCartHasProducts == 'product_added') $('#header-outer .sf-menu').addClass($wooCartHasProducts);
             //Update header attr
             if(fn('body').find('#header-outer[data-transparent-header]').length > 0) {

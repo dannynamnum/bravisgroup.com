@@ -33,7 +33,7 @@ jQuery(document).ready(function($){
 				$('#poststuff #nectar-metabox-page-header').stop(true,true).fadeIn(500);
 			}
 			
-			
+			$('#poststuff #nectar-metabox-post-config').stop(true,true).fadeIn(500);
 		}
 		
 		// >= WP 3.6 

@@ -38,7 +38,7 @@ function nectar_colors() {
 	#header-outer .widget_shopping_cart .cart_list a, .woocommerce .star-rating, .woocommerce-page table.cart a.remove, .woocommerce form .form-row .required, .woocommerce-page form .form-row .required, body #header-secondary-outer #social a:hover i,
 	.woocommerce ul.products li.product .price, '.$social_accent_color.' .woocommerce-page ul.products li.product .price, .nectar-milestone .number.accent-color, header#top nav > ul > li.megamenu > ul > li > a:hover, header#top nav > ul > li.megamenu > ul > li.sfHover > a, body #portfolio-nav a:hover i,
 	span.accent-color, .nectar-love:hover i, .nectar-love.loved i, .portfolio-items .nectar-love:hover i, .portfolio-items .nectar-love.loved i, body .hovered .nectar-love i, header#top nav ul #search-btn a:hover span, header#top nav ul .slide-out-widget-area-toggle a:hover span, #search-outer #search #close a span:hover, 
-	.carousel-wrap[data-full-width="true"] .carousel-heading a:hover i, #search-outer .ui-widget-content li:hover a .title,  #search-outer .ui-widget-content .ui-state-hover .title,  #search-outer .ui-widget-content .ui-state-focus .title, #portfolio-filters-inline .container ul li a.active,
+	.carousel-wrap[data-full-width="true"] .carousel-heading a:hover i, #search-outer .ui-widget-content li:hover a .title,  #search-outer .ui-widget-content .ui-state-hover .title,  #search-outer .ui-widget-content .ui-state-focus .title, .portfolio-filters-inline .container ul li a.active,
 	body [class^="icon-"].icon-default-style, .team-member a.accent-color:hover, .ascend .comment-list .reply a, .wpcf7-form .wpcf7-not-valid-tip, .text_on_hover.product .add_to_cart_button
 	{	
 		color:'. $options["accent-color"].'!important;
@@ -52,7 +52,7 @@ function nectar_colors() {
 	
 	.orbit-wrapper div.slider-nav span.right, .orbit-wrapper div.slider-nav span.left, .flex-direction-nav a, .jp-play-bar,
 	.jp-volume-bar-value, .jcarousel-prev:hover, .jcarousel-next:hover, .portfolio-items .col[data-default-color="true"] .work-info-bg, .portfolio-items .col[data-default-color="true"] .bottom-meta, 
-	#portfolio-filters a, #portfolio-filters #sort-portfolio, .project-attrs li span, .progress li span, .nectar-progress-bar span,
+	.portfolio-filters a, .portfolio-filters #sort-portfolio, .project-attrs li span, .progress li span, .nectar-progress-bar span,
 	#footer-outer #footer-widgets .col .tagcloud a:hover, #sidebar .widget .tagcloud a:hover, article.post .more-link span:hover,
 	article.post.quote .post-content .quote-inner, article.post.link .post-content .link-inner, #pagination .next a:hover, #pagination .prev a:hover, 
 	.comment-list .reply a:hover, input[type=submit]:hover, input[type="button"]:hover, #footer-outer #copyright li a.vimeo:hover, #footer-outer #copyright li a.behance:hover,
@@ -64,7 +64,7 @@ function nectar_colors() {
 	article.post.quote .post-content .quote-inner, article.post.link .post-content .link-inner, article.format-status .post-content .status-inner, article.post.format-aside .aside-inner, 
 	body #header-secondary-outer #social li a.behance:hover, body #header-secondary-outer #social li a.vimeo:hover, #sidebar .widget:hover [class^="icon-"].icon-3x, .woocommerce-page div[data-project-style="text_on_hover"] .single_add_to_cart_button,
 	article.post.quote .content-inner .quote-inner .whole-link, .iosSlider .prev_slide:hover, .iosSlider .next_slide:hover, body [class^="icon-"].icon-3x.alt-style.accent-color, body [class*=" icon-"].icon-3x.alt-style.accent-color, #slide-out-widget-area,
-	#header-outer .widget_shopping_cart a.button, #header-outer a.cart-contents span, .swiper-slide .button.solid_color a, .swiper-slide .button.solid_color_2 a, #portfolio-filters, button[type=submit]:hover, #buddypress button:hover, #buddypress a.button:hover, #buddypress ul.button-nav li.current a, 
+	#header-outer .widget_shopping_cart a.button, #header-outer a.cart-contents .cart-wrap span, .swiper-slide .button.solid_color a, .swiper-slide .button.solid_color_2 a, .portfolio-filters, button[type=submit]:hover, #buddypress button:hover, #buddypress a.button:hover, #buddypress ul.button-nav li.current a, 
 	header#top nav ul .slide-out-widget-area-toggle a:hover i.lines, header#top nav ul .slide-out-widget-area-toggle a:hover i.lines:after, header#top nav ul .slide-out-widget-area-toggle a:hover i.lines:before,  #buddypress a.button:focus, .text_on_hover.product a.added_to_cart, .woocommerce div.product .woocommerce-tabs .full-width-content ul.tabs li a:after, 
     .woocommerce div[data-project-style="text_on_hover"]  .cart .quantity input.minus, .woocommerce div[data-project-style="text_on_hover"]  .cart .quantity input.plus, .woocommerce .span_4 input[type="submit"].checkout-button '.$woocommerce_main.'
 	{
@@ -84,7 +84,7 @@ function nectar_colors() {
 
 	.default-loading-icon:before { border-top-color:'.$options["accent-color"].'!important; }
 
-	#header-outer a.cart-contents span:before { border-color: transparent '.$options["accent-color"].'; }
+	#header-outer a.cart-contents span:before { border-color: transparent '.$options["accent-color"].'!important; }
 	
 	.col:not(#post-area):not(.span_12):not(#sidebar):hover .hovered .circle-border, #sidebar .widget:hover .circle-border { border-color:'.$options["accent-color"].'; }
 
@@ -110,7 +110,7 @@ function nectar_colors() {
 		
 		.nectar-button.regular-button.extra-color-1, .nectar-button.tilt.extra-color-1 { background-color: '.$options["extra-color-1"].'!important; }
 		
-		.icon-3x[class^="icon-"].extra-color-1:not(.alt-style), .icon-tiny[class^="icon-"].extra-color-1, .icon-3x[class*=" icon-"].extra-color-1:not(.alt-style) , .icon-3x[class*=" icon-"].extra-color-1:not(.alt-style)  .circle-border, .woocommerce-page table.cart a.remove, .nectar-milestone .number.extra-color-1, span.extra-color-1,
+		.icon-3x[class^="icon-"].extra-color-1:not(.alt-style), .icon-tiny[class^="icon-"].extra-color-1, .icon-3x[class*=" icon-"].extra-color-1:not(.alt-style) , .icon-3x[class*=" icon-"].extra-color-1:not(.alt-style)  .circle-border, .woocommerce-page table.cart a.remove, #header-outer .widget_shopping_cart .cart_list li a.remove,  #header-outer .woocommerce.widget_shopping_cart .cart_list li a.remove, .nectar-milestone .number.extra-color-1, span.extra-color-1,
 		.team-member ul.social.extra-color-1 li a, .stock.out-of-stock, body [class^="icon-"].icon-default-style.extra-color-1, .team-member a.extra-color-1:hover {
 			color: '.$options["extra-color-1"].'!important;
 		}
@@ -130,7 +130,7 @@ function nectar_colors() {
 			color: '.$options["extra-color-1"].'!important;
 		}
 		
-		.col:not(#post-area):not(.span_12):not(#sidebar):hover .extra-color-1.hovered .circle-border, .woocommerce-page table.cart a.remove, #sidebar .widget:hover .extra-color-1 .circle-border, .woocommerce-page table.cart a.remove { border-color:'.$options["extra-color-1"].'; }
+		.col:not(#post-area):not(.span_12):not(#sidebar):hover .extra-color-1.hovered .circle-border, .woocommerce-page table.cart a.remove, #header-outer .woocommerce.widget_shopping_cart .cart_list li a.remove, #header-outer .woocommerce.widget_shopping_cart .cart_list li a.remove, #sidebar .widget:hover .extra-color-1 .circle-border, .woocommerce-page table.cart a.remove { border-color:'.$options["extra-color-1"].'; }
 		
 		.pricing-column.highlight.extra-color-1 h3 { background-color:'.$options["extra-color-1"].'!important; }
 		
@@ -215,7 +215,7 @@ function nectar_colors() {
 		}
 		
 		if(!empty($options['header-font-hover-color'])) {
-			echo 'body header#top nav > ul > li > a:hover, header#top #logo:hover, body header#top nav .sf-menu > li.sfHover > a, body header#top nav .sf-menu > li.current-menu-item > a, body header#top nav .sf-menu > li.current_page_item > a .sf-sub-indicator i, body header#top nav .sf-menu > li.current_page_ancestor > a .sf-sub-indicator i, body header#top nav .sf-menu > li.sfHover > a, body header#top nav .sf-menu > li.current_page_ancestor > a, body header#top nav .sf-menu > li.current-menu-ancestor > a, body header#top nav .sf-menu > li.current-menu-ancestor > a i,  body header#top nav .sf-menu > li.current_page_item > a, body header#top nav .sf-menu > li.current_page_item > a .sf-sub-indicator [class^="icon-"], body header#top nav .sf-menu > li.current_page_ancestor > a .sf-sub-indicator [class^="icon-"], body header#top nav .sf-menu > li.current-menu-ancestor > a, body .sf-menu > li.sfHover > a .sf-sub-indicator [class^="icon-"], body .sf-menu > li:hover > a .sf-sub-indicator [class^="icon-"], body .sf-menu > li:hover > a, header#top nav ul #search-btn a:hover span, header#top nav ul .slide-out-widget-area-toggle a:hover span, #search-outer #search #close a span:hover { color:'.$options['header-font-hover-color'].'!important; }';
+			echo 'body header#top nav > ul > li > a:hover, header#top #logo:hover, .ascend #header-outer:not(.transparent) .cart-outer:hover .cart-menu-wrap:not(.has_products) .icon-salient-cart, body header#top nav .sf-menu > li.sfHover > a, body header#top nav .sf-menu > li.current-menu-item > a, body header#top nav .sf-menu > li.current_page_item > a .sf-sub-indicator i, body header#top nav .sf-menu > li.current_page_ancestor > a .sf-sub-indicator i, body header#top nav .sf-menu > li.sfHover > a, body header#top nav .sf-menu > li.current_page_ancestor > a, body header#top nav .sf-menu > li.current-menu-ancestor > a, body header#top nav .sf-menu > li.current-menu-ancestor > a i,  body header#top nav .sf-menu > li.current_page_item > a, body header#top nav .sf-menu > li.current_page_item > a .sf-sub-indicator [class^="icon-"], body header#top nav .sf-menu > li.current_page_ancestor > a .sf-sub-indicator [class^="icon-"], body header#top nav .sf-menu > li.current-menu-ancestor > a, body .sf-menu > li.sfHover > a .sf-sub-indicator [class^="icon-"], body .sf-menu > li:hover > a .sf-sub-indicator [class^="icon-"], body .sf-menu > li:hover > a, header#top nav ul #search-btn a:hover span, header#top nav ul .slide-out-widget-area-toggle a:hover span, #search-outer #search #close a span:hover { color:'.$options['header-font-hover-color'].'!important; }';
 			echo 'header#top nav ul .slide-out-widget-area-toggle a:hover i.lines, header#top nav ul .slide-out-widget-area-toggle a:hover i.lines:after, header#top nav ul .slide-out-widget-area-toggle a:hover i.lines:before { background-color:'.$options['header-font-hover-color'].'!important; }';
 		}
 
@@ -255,6 +255,7 @@ function nectar_colors() {
 
 		if(!empty($options['header-slide-out-widget-area-color'])) {
 			echo '#slide-out-widget-area, #slide-out-widget-area a, body #slide-out-widget-area a.slide_out_area_close .icon-default-style[class^="icon-"] { color:'.$options['header-slide-out-widget-area-color'].'!important; }';
+			echo '#slide-out-widget-area .tagcloud a { border-color: '.$options['header-slide-out-widget-area-color'].'!important; }';
 		}
 
 		if(!empty($options['header-slide-out-widget-area-header-color'])) {
@@ -264,6 +265,7 @@ function nectar_colors() {
 
 		if(!empty($options['header-slide-out-widget-area-hover-color'])) {
 			echo 'body #slide-out-widget-area a:hover, html body #slide-out-widget-area a.slide_out_area_close:hover .icon-default-style[class^="icon-"] { color:'.$options['header-slide-out-widget-area-hover-color'].'!important; }';
+			echo '#slide-out-widget-area .tagcloud a:hover { border-color: '.$options['header-slide-out-widget-area-hover-color'].'!important; }';
 		}
 
 	} 
@@ -303,7 +305,15 @@ function nectar_colors() {
 		echo '#call-to-action span { color:'.$options['cta-text-color'].'!important; }';
 	}
 	
-
+	/*slide out widget overlay*/
+	$slide_out_widget_overlay = (!empty($options['header-slide-out-widget-area-overlay-opacity'])) ? $options['header-slide-out-widget-area-overlay-opacity'] : 'dark';
+	if($slide_out_widget_overlay == 'dark') {
+		echo 'body #slide-out-widget-area-bg { background-color: rgba(0,0,0,0.8); }';
+	} else if($slide_out_widget_overlay == 'medium') {
+		echo 'body #slide-out-widget-area-bg { background-color: rgba(0,0,0,0.6); }';
+	} else {
+		echo 'body #slide-out-widget-area-bg { background-color: rgba(0,0,0,0.4); }';
+	}
 
 	if($external_dynamic != 'on') {
 
