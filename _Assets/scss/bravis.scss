@@ -1,9 +1,10 @@
-#boxed .container-wrap { 
-	background-image:url(http://bravisgroup.com/wp-content/uploads/2015/03/debut_light.png);
+#boxed .container-wrap, .container-wrap  { 
+	background-color:#fff;
 }
 
 #header-outer{
-	background-image:url(http://bravisgroup.com/wp-content/uploads/2015/03/debut_light.png);
+	background-color:#fff;
+	box-shadow:none;
 }
 
 header#top .span_9{
@@ -15,4 +16,27 @@ header#top nav > ul > li > a{
 	padding:.5em 0 .25em 0 !important;
 	margin-right:2em;
 	color:#333;
+}
+
+.footer-address{
+	color:#999;
+	
+	h3{
+		color:#666;
+	}
+}
+
+#footer-outer .row{
+	padding:2em 0 1em 0;
+}
+
+.vanilla{
+	
+	.col{
+		margin-bottom:1em;
+	}
+	
+	p{
+		display:none;
+	}
 }
