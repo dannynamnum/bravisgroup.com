@@ -49,6 +49,7 @@
 			if($blog_type == null) $blog_type = 'std-blog-sidebar';
 			
 			$masonry_class = null;
+			$masonry_style = null;
 			$infinite_scroll_class = null;
 			
 			//enqueue masonry script if selected
@@ -63,11 +64,15 @@
 			if(!empty($options['blog_pagination_type']) && $options['blog_pagination_type'] == 'infinite_scroll'){
 				$infinite_scroll_class = ' infinite_scroll';
 			}
+
+			if($masonry_class != null) {
+				$masonry_style = (!empty($options['blog_masonry_type'])) ? $options['blog_masonry_type']: 'classic';
+			}
 			
 			if($blog_type == 'std-blog-sidebar' || $blog_type == 'masonry-blog-sidebar'){
-				echo '<div id="post-area" class="col span_9 '.$masonry_class. $infinite_scroll_class.'"> <div class="posts-container">';
+				echo '<div id="post-area" class="col span_9 '.$masonry_class.' '.$masonry_style.' '. $infinite_scroll_class.'"> <div class="posts-container">';
 			} else {
-				echo '<div id="post-area" class="col span_12 col_last '.$masonry_class. $infinite_scroll_class.'"> <div class="posts-container">';
+				echo '<div id="post-area" class="col span_12 col_last '.$masonry_class.' '.$masonry_style.' '. $infinite_scroll_class.'"> <div class="posts-container">';
 			}
 	
 				if(have_posts()) : while(have_posts()) : the_post(); ?>

@@ -181,6 +181,9 @@ div.slider-nav span.right span.shadow { background-position: right bottom; }
     margin-bottom: 15px;
     /*display: none;*/
     margin-top: 20px;
+    -webkit-box-decoration-break: clone;
+    -o-box-decoration-break: clone;
+    box-decoration-break: clone;
 }
 
 #featured article .post-title > a {

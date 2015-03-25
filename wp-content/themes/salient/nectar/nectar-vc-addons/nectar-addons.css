@@ -207,16 +207,7 @@ body .wpb_toggles > .wpb_element_wrapper .ui-accordion-header span.ui-icon {
 body .wpb_toggles > .wpb_element_wrapper .ui-state-active span.ui-icon {
     background-image: url("../../wpbakery/js_composer/assets/vc/minus.png");
 }
-body .wpb_toggles > .wpb_element_wrapper .add_tab {
-    background-position: 5px center;
-    border: medium none;
-    color: #999999;
-    font-size: 10px;
-    margin-top: 1px;
-    padding-left: 25px !important;
-    padding-right: 5px !important;
-    width: auto;
-}
+
 
 .wpb_content_element .wpb_accordion_holder .wpb_toggle {
     background-color: #FFFFFF;
@@ -224,18 +215,19 @@ body .wpb_toggles > .wpb_element_wrapper .add_tab {
     padding: 0;
 }
 
+.vc_welcome .icon {
+	display: none!important;
+}
+
+.vc_welcome h5 {
+	margin-top: 20px!important;
+}
+
 #poststuff .wpb_element_wrapper h3.ui-accordion-header .tab-label {
 	padding-top: 5px!important;
 }
 
-.wpb_toggles .add_tab {
-    background: url("../../wpbakery/js_composer/assets/vc/add.png") no-repeat scroll center center rgba(0, 0, 0, 0);
-    cursor: pointer;
-    display: inline-block;
-    height: 28px;
-    padding: 0 !important;
-    width: 30px;
-}
+
 
 body .wpb_toggle > .controls_column .column_add, body .wpb_tab > .controls_column .column_add, body .wpb_item > .controls_column .column_add {
     background-image: url("../../wpbakery/js_composer/assets/vc/add_grey.png");
@@ -272,6 +264,97 @@ body .wpb_vc_tab > .controls_column, .wpb_toggle > .controls_column {
     width: 100%;
 }
 
+.vc_controls-content-widget, .composer-switch a, .composer-switch a:visited, .composer-switch .logo-icon,
+.vc_panel-heading {
+    background-color: #18a1f9!important;
+}
+
+.vc_element-icon {
+    clear: both;
+}
+
+body .vc_panel {
+	left: 35%;
+}
+body .vc_controls > .vc_controls-cc {
+    background-color: #79d36f;
+}
+
+body .vc_control-btn .vc_btn-content:hover {
+  background-color: #6cbd63;
+}
+
+body .vc_controls-content-widget .vc_btn-content:hover {
+  background-color: #168edc!important;
+}
+
+.vc_navbar .vc_navbar-brand {
+    display: none!important;
+}
+
+body .vc_panel-tabs > ul, body .vc_panel-footer {
+    background-color: #f0f0f0;
+}
+
+.one-half.vc_col-sm-12 {
+  width: 30%;
+  float: left;
+  height: 175px;
+  box-sizing: border-box!important;
+  -moz-box-sizing: border-box!important;
+  padding: 2% 15px 2% 15px!important;
+  clear: both;
+}
+.one-half-last.vc_col-sm-12{
+  width: 70%;
+  float: left;
+  padding: 2% 15px 2% 0!important;
+  height: 175px;
+  box-sizing: border-box!important;
+  -moz-box-sizing: border-box!important;
+}
+.vc_col-sm-12.clear {clear: both;}
+
+.one-half-last.vc_col-sm-12.tall-fixed-height, .one-half.vc_col-sm-12.tall-fixed-height {
+    height: 265px!important;
+}
+
+.composer-switch .vc_spacer {
+    background-color: #41aff5!important;
+}
+
+.composer-switch .logo-icon {
+    background-image: url('img/logo.png')!important;
+}
+
+body .wpb-elements-list-modal .vc_element-icon {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+body .vc_element-icon {
+    display: block;
+    margin: 0 auto 10px auto;
+}
+
+body .vc_panel {
+    border: none;
+    box-shadow: 0 0 34px rgba(0, 0, 0, 0.4);
+}
+
+body .vc_modal-content {
+    border: none;
+    border-radius: 10px;
+}
+
+body .wpb-elements-list-modal .wpb-content-layouts li {
+    height: auto;
+}
+
+body .wpb-elements-list-modal .wpb-content-layouts a .vc_element-description {
+    color: #707070;
+}
 
 /* text block */
 .wpb-layout-element-button .icon-wpb-layer-shape-text { background-image: url(img/text.png)!important; background-position: 0px 0px!important;}
@@ -437,11 +520,27 @@ body .wpb-edit-form  .chzn-container .chzn-results li:hover {
     padding-left: 150px;
 }
 
-.wpb-elements-list-modal {
+#vc_add-element-dialog-title {
+    display: none!important;
+}
+
+.vc_modal-content {
     background-color: #17191b!important;
 }
 
-.wpb-content-layouts li {
+.vc_modal-header {
+    background-color: transparent!important;
+}
+
+.vc_modal-dialog  ul.isotope-filter {
+    float: left;
+}
+
+.wpb-content-layouts-container > li {
+    clear: both;
+}
+
+.wpb-content-layouts-container li {
     opacity: 0;
      -webkit-transition-property: -webkit-transform!important;
      -moz-transition-property:    -moz-transform!important;
@@ -452,6 +551,19 @@ body .wpb-edit-form  .chzn-container .chzn-results li:hover {
     border: none!important;
     margin: 0px 0px 2px 2px!important;
     text-align: center;
+}
+
+.wpb-content-layouts-container .isotope-filter li {
+    margin: 0px 0px 11px 5px!important;
+    background-color: transparent!important;
+}
+
+.wpb-elements-list-modal .vc_modal-dialog .vc_modal-body .wpb-content-layouts-container .isotope-filter li {
+    padding-right: 5px;
+}
+
+.wpb-content-layouts-container .isotope-filter {
+    margin-top: -5px;
 }
 
 .wpb-content-layouts a {
@@ -485,10 +597,14 @@ body #vc_elements_name_filter {
     height: 29px;
     padding: 2px 6px 4px 25px;
     position: absolute;
-    right: 0;
-    top: -5px;
     width: 176px;
+    top: 6px;
     z-index: 1;
+}
+
+.vc_modal-header .vc_close {
+    position: relative;
+    z-index: 1000;
 }
 
 .wpb-content-layouts-container .isotope-filter li {
@@ -506,3 +622,17 @@ body #vc_elements_name_filter {
 .wpb-content-layouts-container .isotope-filter li.active a, .wpb-content-layouts-container .isotope-filter li:hover a {
     color: #fff!important;
 }
+
+.vc_modal-dialog {
+    width: 76%!important;
+}
+
+.vc_modal {
+    height: 100%!important;
+}
+
+.vc_modal-header {
+    position: absolute;
+    right: 0;
+}
+

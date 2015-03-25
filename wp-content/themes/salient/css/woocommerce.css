@@ -72,7 +72,7 @@ body[data-header-color="custom"]:not(.ascend) #boxed #header-outer .cart-menu .c
 
 #header-outer .cart-menu .cart-icon-wrap {
 	margin-left: 0px;
-	height: 21px;
+	height: 24px;
 	width: 69px;
 	line-height: 18px!important;
 	position: relative;
@@ -100,11 +100,11 @@ body[data-header-color="custom"]:not(.ascend) #boxed #header-outer .cart-menu .c
 	border-radius: 0px!important;
 	font-size: 17px!important;
 	line-height: 17px!important;
-	height: 17px;
+	height: 21px;
 	position: absolute;
 	top: 2px;
-	left: 2px;
-	width: 18px;
+	left: 0px;
+	width: 22px;
 	color: rgba(0,0,0,0.4);
 }
 
@@ -418,7 +418,7 @@ body[data-smooth-scrolling="0"] #header-outer .widget_shopping_cart, body[data-s
 	color: #fff!important;
 }
 
-#header-outer a.cart-contents span {
+#header-outer a.cart-contents .cart-wrap span {
 	background: none repeat scroll 0 0 #27CCC0;
     border-radius: 3px 3px 3px 3px;
     color: #FFFFFF;
@@ -432,7 +432,7 @@ body[data-smooth-scrolling="0"] #header-outer .widget_shopping_cart, body[data-s
     width: 20px;	
 }
 
-#header-outer a.cart-contents span:before {
+#header-outer a.cart-contents .cart-wrap span:before {
  	border-color: transparent #27CCC0 transparent;
     border-style: solid solid solid none;
     border-width: 5px 5px 5px medium;
@@ -447,10 +447,12 @@ body[data-smooth-scrolling="0"] #header-outer .widget_shopping_cart, body[data-s
 
 #header-outer .cart-wrap {
 	position: relative;
-	float: right;
 	font-size: 12px;
 	margin-right: 20px;
+	z-index: 10;
+	float: right;
 }
+
 
 #header-outer nav.cart-active #search-btn {
 	margin-left: 10px!important;
@@ -523,8 +525,16 @@ html .woocommerce ul.products li.first, html .woocommerce-page ul.products li.fi
 	clear: none;
 }
 
+html .woocommerce ul.products li.first.classic, html .woocommerce-page ul.products li.first.classic {
+	clear: both;
+}
+
 /*fullwidth*/
 @media only screen and (max-width: 1500px) and (min-width: 1000px) {
+	
+	html .woocommerce ul.products li.first, html .woocommerce-page ul.products li.first {
+		clear: both;
+	}
 
 	.full-width-content ul.products li.product, .woocommerce-page .full-width-content ul.products li.product {
 		width: 22.45%;
@@ -541,6 +551,11 @@ html .woocommerce ul.products li.first, html .woocommerce-page ul.products li.fi
 }
 
 @media only screen and (min-width: 1500px) {
+
+	html .woocommerce ul.products li.first, html .woocommerce-page ul.products li.first {
+		clear: both;
+	}
+	
 	.full-width-content .vc_span12 ul.products li.product, .woocommerce-page .full-width-content ul.products li.product {
 		width: 17.54%;
 	}
@@ -550,7 +565,7 @@ html .woocommerce ul.products li.first, html .woocommerce-page ul.products li.fi
 	}
 
 	.full-width-content .vc_span12 ul.products li.first, .woocommerce-page .full-width-content ul.products li.first {
-		clear: none;
+		clear: none!important;
 	}
 	.full-width-content .vc_span12 ul.products li:nth-child(5n+6), .woocommerce-page .full-width-content ul.products li:nth-child(5n+6) {
 		clear: both;
@@ -576,7 +591,7 @@ html .woocommerce ul.products li.first, html .woocommerce-page ul.products li.fi
 	}
 
      body .full-width-content .vc_span12 ul.products li:nth-child(3n+4), .woocommerce-page .full-width-content ul.products li:nth-child(3n+4) {
-		clear: both;
+		clear: both!important;
 	}
 	 body .full-width-content .vc_span12 ul.products li.first, .woocommerce-page .full-width-content ul.products li.first {
 		clear: none;
@@ -603,6 +618,11 @@ html .woocommerce ul.products li.first, html .woocommerce-page ul.products li.fi
 	html .full-width-content .vc_span12 ul.products li.product, html .woocommerce-page .full-width-content ul.products li.product {
 		clear: none;
 	}
+
+	html .woocommerce ul.products li.first.classic, html .woocommerce-page ul.products li.first.classic {
+		clear: none;
+	}
+
 }
 
 @media only screen and (max-width: 690px) {
@@ -1602,10 +1622,18 @@ table.cart a.remove {
 	font-size: 12px!important;
 }
 
+.woocommerce-checkout #payment div.payment_box {
+   background-color: transparent!important;
+}
+
 .product-categories .children {
     margin-left: 20px !important;
     margin-top: 10px;
     margin-bottom: 0!important;
+}
+
+.select2-drop-active {
+	z-index: 10000000!important;
 }
 
 .cat-parent {
